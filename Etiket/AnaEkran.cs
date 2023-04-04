@@ -18,7 +18,7 @@ namespace Etiket
         {
             InitializeComponent();
 
-            Text = "ArGeMuP " + Kendi.Adı + " " + Kendi.Sürüm;
+            Text = "ArGeMuP " + Kendi.Adı + " " + Kendi.Sürümü_Dosya;
 
             Görsel_Kat1_Kat2.SplitterDistance = Görsel_Kat1_Kat2.Height / 4;
             Detaylar_YazıResim.Panel2Collapsed = true;
@@ -26,34 +26,22 @@ namespace Etiket
         }
         private void AnaEkran_Shown(object sender, EventArgs e)
         {
-            Ortak.ArkaPlanRengi = Ortak.Renge(Ortak.Depo_Ayarlar.Oku_BaytDizisi("Kağıt"), Color.White);
-            Görsel_Çıktı_ArkaPlanRenk.FlatAppearance.CheckedBackColor = Ortak.ArkaPlanRengi;
-            Görsel_Çıktı_ArkaPlanRenk.Checked = Ortak.ArkaPlanRengi != Color.Transparent;
-            
-            Görsel_Çıktı_Genişlik.Value = (decimal)Ortak.Depo_Ayarlar.Oku_Sayı("Kağıt", 50, 1);
-            Görsel_Çıktı_Yükseklik.Value = (decimal)Ortak.Depo_Ayarlar.Oku_Sayı("Kağıt", 30, 2);
-            
-            Yazıcı_Sol.Value = (decimal)Ortak.Depo_Ayarlar["Yazıcı"].Oku_Sayı(null, 5, 1);
-            Yazıcı_Üst.Value = (decimal)Ortak.Depo_Ayarlar["Yazıcı"].Oku_Sayı(null, 5, 2);
-
-            Görsel_Çıktı_BoyutlarıDeğişti(null, null);
-            Görsel_Çıktı_Yakınlaştırma.Value = 35;
-            Görsel_Çıktı_Yakınlaştırma_Scroll(null, null);
-
-            foreach (Ortak.Görsel biri in Ortak.Görsel_ler)
+            IDepo_Eleman Şablonlar = Ortak.Depo_Ayarlar["Şablonlar"];
+            for (int i = 0; i < Şablonlar.Elemanları.Length; i++)
             {
-                Görsel_Elemanlar.Items.Add(biri.Adı, biri.Görünsün);
+                Şablon_Şablonlar.Items.Add(Şablonlar.Elemanları[i].Adı, Şablonlar.Elemanları[i].Oku_Bit(null));
             }
 
-            Çizdir();
+            if (Şablon_Şablonlar.Items.Count > 0) Şablon_Şablonlar.SelectedIndex = 0;
+
             Kaydet.Enabled = false;
         }
         private void AnaEkran_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (Kaydet.Enabled)
             {
-                DialogResult dr = MessageBox.Show("Değişiklikleri kaydetmeden çıkmak istiyor musunuz?", Text, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
-                if (dr == DialogResult.Cancel)
+                DialogResult dr = MessageBox.Show("Değişiklikleri kaydetmeden çıkmak istiyor musunuz?", Text, MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+                if (dr == DialogResult.No)
                 {
                     e.Cancel = true;
                 }
@@ -77,19 +65,7 @@ namespace Etiket
         }
         private void Kaydet_Click(object sender, EventArgs e)
         {
-            Ortak.Depo_Ayarlar.Sil("Görseller", true, true);
-            foreach (Ortak.Görsel biri in Ortak.Görsel_ler)
-            {
-                biri.Depo_Kaydet(Ortak.Depo_Ayarlar);
-            }
-
-            Ortak.Depo_Ayarlar.Yaz("Kağıt", Ortak.Renkten(Ortak.ArkaPlanRengi), 0);
-            Ortak.Depo_Ayarlar.Yaz("Kağıt", (double)Görsel_Çıktı_Genişlik.Value, 1);
-            Ortak.Depo_Ayarlar.Yaz("Kağıt", (double)Görsel_Çıktı_Yükseklik.Value, 2);
-
-            if (Yazıcı_Yazıcılar.Text.DoluMu()) Ortak.Depo_Ayarlar.Yaz("Yazıcı", Yazıcı_Yazıcılar.Text);
-            Ortak.Depo_Ayarlar.Yaz("Yazıcı", (double)Yazıcı_Sol.Value, 1);
-            Ortak.Depo_Ayarlar.Yaz("Yazıcı", (double)Yazıcı_Üst.Value, 2);
+            Şablon_Kaydet();
 
             File.WriteAllText(Ortak.Depo_Komut["Ayarlar", 0], Ortak.Depo_Ayarlar.YazıyaDönüştür());
 
@@ -97,14 +73,36 @@ namespace Etiket
         }
         private void Sayfalar_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (Sayfalar.SelectedIndex == 1 && Yazıcı_Yazıcılar.Items.Count == 0)
+            if (Sayfalar.SelectedIndex != 0) 
             {
-                for (int i = 0; i < PrinterSettings.InstalledPrinters.Count; i++)
+                //Şablon seçmeden diğer sekmelere gitmesin
+                if (Şablon_Şablonlar.SelectedIndex < 0)
                 {
-                    Yazıcı_Yazıcılar.Items.Add(PrinterSettings.InstalledPrinters[i]);
+                    Sayfalar.SelectedIndex = 0;
+                    MessageBox.Show("Öncelikle bir şablon seçiniz veya oluşturunuz.", Text);
+                }
+            }
+            else
+            {
+                if (Kaydet.Enabled)
+                {
+                    //şablon sayfasına değişiklik yapılarak geri dönüldü, kayıt
+                    Şablon_Kaydet();
+                }
+            }
+
+            //Yazıcı sayfası için yazıcıları güncellesin
+            if (Sayfalar.SelectedIndex == 2)
+            {
+                if (Yazıcı_Yazıcılar.Items.Count < 1)
+                {
+                    for (int i = 0; i < PrinterSettings.InstalledPrinters.Count; i++)
+                    {
+                        Yazıcı_Yazıcılar.Items.Add(PrinterSettings.InstalledPrinters[i]);
+                    }
                 }
 
-                IDepo_Eleman yzc = Ortak.Depo_Ayarlar["Yazıcı"];
+                IDepo_Eleman yzc = Ortak.Depo_Şablon["Yazıcı"];
                 if (!Yazıcı_Yazıcılar.Items.Contains(yzc.Oku(null, "Acayip Yazıcı")))
                 {
                     Yazıcı_Açıklama.Text = "Kaydedilen yazıcı (" + yzc[0] + ") mevcut olmadığından seçilemedi";
@@ -123,15 +121,118 @@ namespace Etiket
             }
         }
 
-        void Çizdir()
+        #region Sayfa Şablon
+        private void Şablon_Ekle_Click(object sender, EventArgs e)
         {
-            if (Görsel_Çıktı.Image != null) Görsel_Çıktı.Image.Dispose();
-            string Hatalar = Ortak.Görseller_Görseli_ResimHalineGetir(out Image Resim);
-            Görsel_Çıktı.Image = Resim;
-            Görsel_Çıktı.Size = Resim.Size;
+            if (Şablon_Adı.Text.BoşMu(true)) return;
 
-            if (Hatalar.DoluMu()) Hata_Ekle(Hatalar);
+            IDepo_Eleman şbl = Ortak.Depo_Ayarlar["Şablonlar"].Bul(Şablon_Adı.Text);
+            if (şbl != null)
+            {
+                MessageBox.Show("Önceden kullanılmamaış bir isim seçiniz");
+                return;
+            }
+
+            Ortak.Depo_Ayarlar["Şablonlar"].Yaz(Şablon_Adı.Text, true);
+            Şablon_Şablonlar.Items.Add(Şablon_Adı.Text, true);
+
+            Kaydet.Enabled = true;
         }
+        private void Şablon_Kopyala_Click(object sender, EventArgs e)
+        {
+            if (Şablon_Adı.Text.BoşMu(true) || Şablon_Şablonlar.SelectedIndex < 0) return;
+            
+            IDepo_Eleman Şablonlar = Ortak.Depo_Ayarlar["Şablonlar"];
+            IDepo_Eleman şbl = Şablonlar.Bul(Şablon_Adı.Text);
+            if (şbl != null)
+            {
+                MessageBox.Show("Önceden kullanılmamaış bir isim seçiniz");
+                return;
+            }
+
+            IDepo_Eleman yeni = Şablonlar[Şablon_Adı.Text];
+            yeni.Yaz(null, true);
+            yeni.Ekle(null, Şablonlar[Şablon_Şablonlar.Text].YazıyaDönüştür(null, true));
+
+            Şablon_Şablonlar.Items.Add(Şablon_Adı.Text, true);
+
+            Kaydet.Enabled = true;
+        }
+        private void Şablon_Sil_Click(object sender, EventArgs e)
+        {
+            if (Şablon_Şablonlar.SelectedIndex < 0) return;
+
+            DialogResult dr = MessageBox.Show("Seçtiğiniz şablon silinecek.", Text, MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+            if (dr == DialogResult.No) return;
+
+            Ortak.Depo_Ayarlar["Şablonlar"].Sil(Şablon_Şablonlar.Text);
+            Şablon_Şablonlar.Items.Remove(Şablon_Şablonlar.Text);
+
+            Kaydet.Enabled = true;
+        }
+
+        private void Şablon_Şablonlar_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            if (e.Index < 0) return;
+
+            string adı = Şablon_Şablonlar.Items[e.Index].ToString();
+            Ortak.Depo_Ayarlar["Şablonlar"].Yaz(adı, e.NewValue == CheckState.Checked);
+
+            Kaydet.Enabled = true;
+        }
+        private void Şablon_Şablonlar_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (Şablon_Şablonlar.SelectedIndex < 0) return;
+            bool ÖncekiDeğer_Kaydet = Kaydet.Enabled;
+
+            Ortak.Görseller_DizisiniOluştur(Ortak.Depo_Ayarlar["Şablonlar"][Şablon_Şablonlar.Text], true, false, false);
+            Sayfa_Görsel.Text = "Görsel - " + Şablon_Şablonlar.Text;
+            Sayfa_Yazıcı.Text = "Yazıcı - " + Şablon_Şablonlar.Text;
+
+            Ortak.SeçiliGörsel = null;
+            Ortak.ArkaPlanRengi = Ortak.Renge(Ortak.Depo_Şablon.Oku_BaytDizisi("Kağıt"), Color.White);
+            Görsel_Çıktı_ArkaPlanRenk.FlatAppearance.CheckedBackColor = Ortak.ArkaPlanRengi;
+            Görsel_Çıktı_ArkaPlanRenk.Checked = Ortak.ArkaPlanRengi != Color.Transparent;
+
+            Görsel_Çıktı_Genişlik.Value = (decimal)Ortak.Depo_Şablon.Oku_Sayı("Kağıt", 50, 1);
+            Görsel_Çıktı_Yükseklik.Value = (decimal)Ortak.Depo_Şablon.Oku_Sayı("Kağıt", 30, 2);
+
+            Yazıcı_Yazıcılar.SelectedIndex = -1;
+            Yazıcı_Sol.Value = (decimal)Ortak.Depo_Şablon["Yazıcı"].Oku_Sayı(null, 5, 1);
+            Yazıcı_Üst.Value = (decimal)Ortak.Depo_Şablon["Yazıcı"].Oku_Sayı(null, 5, 2);
+
+            Görsel_Çıktı_BoyutlarıDeğişti(null, null);
+            Görsel_Çıktı_Yakınlaştırma.Value = 35;
+            Görsel_Çıktı_Yakınlaştırma_Scroll(null, null);
+
+            Görsel_Elemanlar.Items.Clear();
+            foreach (Ortak.Görsel biri in Ortak.Görsel_ler)
+            {
+                Görsel_Elemanlar.Items.Add(biri.Adı, biri.Görünsün);
+            }
+
+            Kaydet.Enabled = ÖncekiDeğer_Kaydet;
+        }
+
+        void Şablon_Kaydet()
+        {
+            if (Ortak.Depo_Şablon == null) return;
+
+            Ortak.Depo_Şablon.Sil("Görseller", true, true);
+            foreach (Ortak.Görsel biri in Ortak.Görsel_ler)
+            {
+                biri.Depo_Kaydet(Ortak.Depo_Şablon);
+            }
+
+            Ortak.Depo_Şablon.Yaz("Kağıt", Ortak.Renkten(Ortak.ArkaPlanRengi), 0);
+            Ortak.Depo_Şablon.Yaz("Kağıt", (double)Görsel_Çıktı_Genişlik.Value, 1);
+            Ortak.Depo_Şablon.Yaz("Kağıt", (double)Görsel_Çıktı_Yükseklik.Value, 2);
+
+            if (Yazıcı_Yazıcılar.Text.DoluMu()) Ortak.Depo_Şablon.Yaz("Yazıcı", Yazıcı_Yazıcılar.Text);
+            Ortak.Depo_Şablon.Yaz("Yazıcı", (double)Yazıcı_Sol.Value, 1);
+            Ortak.Depo_Şablon.Yaz("Yazıcı", (double)Yazıcı_Üst.Value, 2);
+        }
+        #endregion
 
         #region Sayfa Görsel
         private void Görsel_Ayar_Değişti(object sender, EventArgs e)
@@ -184,7 +285,7 @@ namespace Etiket
             }
 
             Ortak.SeçiliGörsel.YenidenHesaplat();
-            Çizdir();
+            Görsel_Çizdir();
 
             Kaydet.Enabled = true;
         }
@@ -237,17 +338,16 @@ namespace Etiket
             }
 
             Ortak.SeçiliGörsel = şimdi_seçilen;
-            Çizdir();
+            Görsel_Çizdir();
         }
         private void Görsel_Elemanlar_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             if (e.Index < 0) return; 
 
             string adı = Görsel_Elemanlar.Items[e.Index].ToString();
-            Ortak.Görsel gecici = Ortak.Görseller_Görseli_Bul(adı);
-            gecici.Görünsün = e.NewValue == CheckState.Checked;
+            Ortak.Görseller_Görseli_Bul(adı).Görünsün = e.NewValue == CheckState.Checked;
 
-            Çizdir();
+            Görsel_Çizdir();
             Kaydet.Enabled = true;
         }
         
@@ -267,7 +367,7 @@ namespace Etiket
             Görsel_Elemanlar.SetItemChecked(yeni_konum, a.Görünsün);
             Görsel_Elemanlar.Items.RemoveAt(Görsel_Elemanlar.SelectedIndex);
 
-            Çizdir();
+            Görsel_Çizdir();
 
             Görsel_Elemanlar.SelectedIndex = yeni_konum;
             Kaydet.Enabled = true;
@@ -288,7 +388,7 @@ namespace Etiket
             Görsel_Elemanlar.SetItemChecked(yeni_konum, a.Görünsün);
             Görsel_Elemanlar.Items.RemoveAt(Görsel_Elemanlar.SelectedIndex);
 
-            Çizdir();
+            Görsel_Çizdir();
 
             Görsel_Elemanlar.SelectedIndex = yeni_konum - 1;
             Kaydet.Enabled = true;
@@ -304,8 +404,8 @@ namespace Etiket
                 return;
             }
 
-            DialogResult dr = MessageBox.Show("Seçtiğiniz görsel silinecek.", Text, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
-            if (dr == DialogResult.Cancel) return;
+            DialogResult dr = MessageBox.Show("Seçtiğiniz görsel silinecek.", Text, MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+            if (dr == DialogResult.No) return;
 
             Ortak.Görsel a = Ortak.Görseller_Görseli_Bul(Görsel_Elemanlar.Text);
             List<Ortak.Görsel> l = Ortak.Görsel_ler.ToList();
@@ -315,13 +415,17 @@ namespace Etiket
             Görsel_Elemanlar.Items.RemoveAt(Görsel_Elemanlar.SelectedIndex);
 
             Ortak.SeçiliGörsel = null;
-            Çizdir();
+            Görsel_Çizdir();
             Kaydet.Enabled = true;
         }
         private void Görsel_Eleman_Resim_Click(object sender, EventArgs e)
         {
-            string adı = "Resim " + Path.GetRandomFileName();
-            while (Ortak.Görseller_Görseli_Bul(adı) != null) adı = "Resim " + Path.GetRandomFileName();
+            string adı = null;
+            for (int i = 1; i < 1000; i++)
+            {
+                adı = "Resim " + i;
+                if (Ortak.Görseller_Görseli_Bul(adı) == null) break;
+            }
 
             Array.Resize(ref Ortak.Görsel_ler, Ortak.Görsel_ler.Length + 1);
             Ortak.Görsel_ler[Ortak.Görsel_ler.Length - 1] = new Ortak.Görsel(null)
@@ -335,19 +439,23 @@ namespace Etiket
                 EtKalınlığı = 1,
                 Resim_Yuvarlama_Çap = 5,
                 Çerçeve = new RectangleF(0, 0, 20, 20),
-                Yazıİçeriği_Veya_ResimDosyaYolu = "Buraya resminizin dosya yolunu giriniz",
+                Yazıİçeriği_Veya_ResimDosyaYolu = null,
             };
 
             int konum = Görsel_Elemanlar.Items.Add(adı, true);
             Görsel_Elemanlar.SelectedIndex = konum;
 
-            Çizdir();
+            Görsel_Çizdir();
             Kaydet.Enabled = true;
         }
         private void Görsel_Eleman_Yazı_Click(object sender, EventArgs e)
         {
-            string adı = "Yazı " + Path.GetRandomFileName();
-            while (Ortak.Görseller_Görseli_Bul(adı) != null) adı = "Yazı " + Path.GetRandomFileName();
+            string adı = null;
+            for (int i = 1; i < 1000; i++)
+            {
+                adı = "Yazı " + i;
+                if (Ortak.Görseller_Görseli_Bul(adı) == null) break;
+            }
 
             Array.Resize(ref Ortak.Görsel_ler, Ortak.Görsel_ler.Length + 1);
             Ortak.Görsel_ler[Ortak.Görsel_ler.Length - 1] = new Ortak.Görsel(null)
@@ -370,7 +478,7 @@ namespace Etiket
             int konum = Görsel_Elemanlar.Items.Add(adı, true);
             Görsel_Elemanlar.SelectedIndex = konum;
 
-            Çizdir();
+            Görsel_Çizdir();
             Kaydet.Enabled = true;
         }
 
@@ -382,7 +490,7 @@ namespace Etiket
             Görsel_Eleman_Renk.BackColor = RenkSeçici.Color;
 
             Ortak.SeçiliGörsel.YenidenHesaplat();
-            Çizdir();
+            Görsel_Çizdir();
 
             Kaydet.Enabled = true;
         }
@@ -407,7 +515,7 @@ namespace Etiket
 
             Görsel_Eleman_Renk_Arkaplan.FlatAppearance.CheckedBackColor = Ortak.SeçiliGörsel.Renk_ArkaPlan;
             Ortak.SeçiliGörsel.YenidenHesaplat();
-            Çizdir();
+            Görsel_Çizdir();
 
             Kaydet.Enabled = true;
         }
@@ -433,7 +541,7 @@ namespace Etiket
 
             Görsel_Ayar_Değişti(null, null);
             Ortak.SeçiliGörsel = null;
-            Çizdir();
+            Görsel_Çizdir();
             Görsel_Elemanlar.SelectedIndex = -1;
         }
         private void Görsel_Çıktı_MouseMove(object sender, MouseEventArgs e)
@@ -482,7 +590,7 @@ namespace Etiket
             Ortak.KullanılabilirAlan_mm = new SizeF((float)Görsel_Çıktı_Genişlik.Value, (float)Görsel_Çıktı_Yükseklik.Value);
             Ortak.KullanılabilirAlan_piksel_Resim = new Size((int)(Ortak.KullanılabilirAlan_mm.Width * Ortak.YakınlaşmaOranı / 0.254), (int)(Ortak.KullanılabilirAlan_mm.Height * Ortak.YakınlaşmaOranı / 0.254));
 
-            Çizdir();
+            Görsel_Çizdir();
         }
         private void Görsel_Çıktı_ArkaPlanRenk_CheckedChanged(object sender, EventArgs e)
         {
@@ -503,7 +611,7 @@ namespace Etiket
 
             Görsel_Çıktı_ArkaPlanRenk.FlatAppearance.CheckedBackColor = Ortak.ArkaPlanRengi;
 
-            Çizdir();
+            Görsel_Çizdir();
 
             Kaydet.Enabled = true;
         }
@@ -512,7 +620,17 @@ namespace Etiket
             Ortak.YakınlaşmaOranı = Görsel_Çıktı_Yakınlaştırma.Value * 0.1f;
             Ortak.KullanılabilirAlan_piksel_Resim = new Size((int)(Ortak.KullanılabilirAlan_mm.Width * Ortak.YakınlaşmaOranı / 0.254), (int)(Ortak.KullanılabilirAlan_mm.Height * Ortak.YakınlaşmaOranı / 0.254));
 
-            Çizdir();
+            Görsel_Çizdir();
+        }
+
+        void Görsel_Çizdir()
+        {
+            if (Görsel_Çıktı.Image != null) Görsel_Çıktı.Image.Dispose();
+            string Hatalar = Ortak.Görseller_Görseli_ResimHalineGetir(out Image Resim);
+            Görsel_Çıktı.Image = Resim;
+            Görsel_Çıktı.Size = Resim.Size;
+
+            if (Hatalar.DoluMu()) Hata_Ekle(Hatalar);
         }
         #endregion
 

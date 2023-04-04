@@ -20,11 +20,13 @@ Genel amaçlı etiket üretme ve yazdırma uygulaması ArgeMup@yandex.com
             <Görsel Adı> / bit <Yazı_1_Resim_0> / Yazı ise -> <İçerik>, Resim ise -> <Resim Dosya Yolu>
 
     Ayarlar Depo Dosyası İçeriği
-        Kağıt / <Rengi> / Genişlik / Yükseklik
-        Yazıcı / <Yazıcı adı> / Sayı <Soldan Boşluk> / Sayı <Üstten Boşluk>
-        Görseller
-            <Görsel Adı> / bit Yazı_1_Resim_0 / bit Görünsün / Açı / Renk / Renk Arkaplan / Et Kalınlığı (Yazı için punto - 0 ise sığdır, Resim için çerçeve kalınlığı - 0 ise çizdirme)
-                Sol Üst Köşe / Sol / Üst / Genişlik / Yükseklik
-                İçerik / Yazıİçeriği_Veya_ResimDosyaYolu
-                Yazı / KarakterKümesi / Kalın / Yaslama_Yatay / Yaslama_Dikey
-                Resim / Çember çapı
+        Şablonlar
+            <Şablon Adı> / bit <Etkin>
+                Kağıt / <Rengi> / Genişlik / Yükseklik
+                Yazıcı / <Yazıcı adı> / Sayı <Soldan Boşluk> / Sayı <Üstten Boşluk>
+                Görseller
+                    <Görsel Adı> / bit Yazı_1_Resim_0 / bit Görünsün / Açı / Renk / Renk Arkaplan / Et Kalınlığı (Yazı için punto - 0 ise sığdır, Resim için çerçeve kalınlığı - 0 ise çizdirme)
+                        Sol Üst Köşe / Sol / Üst / Genişlik / Yükseklik
+                        İçerik / Yazıİçeriği_Veya_ResimDosyaYolu
+                        Yazı / KarakterKümesi / Kalın / Yaslama_Yatay / Yaslama_Dikey
+                        Resim / Çember çapı

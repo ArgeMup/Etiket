@@ -1,16 +1,13 @@
 ﻿using ArgeMup.HazirKod;
 using ArgeMup.HazirKod.Ekİşlemler;
-using System;
 using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Printing;
-using System.IO;
 
 namespace Etiket
 {
     public static class Ortak
     {
         public static Depo_ Depo_Komut = null, Depo_Ayarlar = null;
+        public static IDepo_Eleman Depo_Şablon = null;
         public static Görsel[] Görsel_ler = null;
         public static SizeF KullanılabilirAlan_mm;
         public static Size KullanılabilirAlan_piksel_Resim;
@@ -31,7 +28,7 @@ namespace Etiket
             Girdi[2] = Renk.G;
             Girdi[3] = Renk.B;
 
-            return Girdi.HexYazıya();
+            return ArgeMup.HazirKod.Dönüştürme.D_HexYazı.BaytDizisinden(Girdi);
         }
 
         public class Görsel
@@ -58,33 +55,33 @@ namespace Etiket
             //İç Kullanım Resim
             public Image Resim_;
             public Pen Resim_Kalem_;
-            public GraphicsPath Resim_Çerçeve_Yolu_;
+            public System.Drawing.Drawing2D.GraphicsPath Resim_Çerçeve_Yolu_;
             #endregion
 
-            public Görsel(IDepo_Eleman Detaylar)
+            public Görsel(IDepo_Eleman ŞablonDalı)
             {
-                if (Detaylar == null) return;
+                if (ŞablonDalı == null) return;
 
-                Adı = Detaylar.Adı;
-                Yazı_1_Resim_0 = Detaylar.Oku_Bit(null, true, 0);
-                Görünsün = Detaylar.Oku_Bit(null, true, 1);
-                Açı = (float)Detaylar.Oku_Sayı(null, 0, 2);
-                Renk = Renge(Detaylar.Oku_BaytDizisi(null, null, 3), Color.Black);
-                Renk_ArkaPlan = Renge(Detaylar.Oku_BaytDizisi(null, null, 4), Color.Yellow);
-                EtKalınlığı = (float)Detaylar.Oku_Sayı(null, Yazı_1_Resim_0 ? 0 : 1, 5);
+                Adı = ŞablonDalı.Adı;
+                Yazı_1_Resim_0 = ŞablonDalı.Oku_Bit(null, true, 0);
+                Görünsün = ŞablonDalı.Oku_Bit(null, true, 1);
+                Açı = (float)ŞablonDalı.Oku_Sayı(null, 0, 2);
+                Renk = Renge(ŞablonDalı.Oku_BaytDizisi(null, null, 3), Color.Black);
+                Renk_ArkaPlan = Renge(ŞablonDalı.Oku_BaytDizisi(null, null, 4), Color.Yellow);
+                EtKalınlığı = (float)ŞablonDalı.Oku_Sayı(null, Yazı_1_Resim_0 ? 0 : 1, 5);
 
-                IDepo_Eleman k = Detaylar["Sol Üst Köşe"];
+                IDepo_Eleman k = ŞablonDalı["Sol Üst Köşe"];
                 Çerçeve = new RectangleF((float)k.Oku_Sayı(null, 0, 0), (float)k.Oku_Sayı(null, 0, 1), (float)k.Oku_Sayı(null, 10, 2), (float)k.Oku_Sayı(null, 5, 3));
 
-                Yazıİçeriği_Veya_ResimDosyaYolu = Detaylar.Oku("İçerik", "Hatalı");
+                Yazıİçeriği_Veya_ResimDosyaYolu = ŞablonDalı.Oku("İçerik");
 
-                k = Detaylar["Yazı"];
+                k = ŞablonDalı["Yazı"];
                 Yazı_KarakterKümesi = k.Oku(null, "Calibri", 0);
                 Yazı_Kalın = k.Oku_Bit(null, false, 1);
                 Yazı_Yaslama_Yatay = k.Oku_TamSayı(null, 1, 2);
                 Yazı_Yaslama_Dikey = k.Oku_TamSayı(null, 1, 3);
 
-                k = Detaylar["Resim"];
+                k = ŞablonDalı["Resim"];
                 Resim_Yuvarlama_Çap = (float)k.Oku_Sayı(null, 2, 0);
             }
             public void Çizdir(Graphics Grafik, bool Seçildi)
@@ -144,7 +141,7 @@ namespace Etiket
                 else
                 {
                     //Resimi hazırlama
-                    if (Resim_ == null && File.Exists(Yazıİçeriği_Veya_ResimDosyaYolu))
+                    if (Resim_ == null && Yazıİçeriği_Veya_ResimDosyaYolu.DoluMu(true))
                     {
                         Resim_ = Image.FromFile(Yazıİçeriği_Veya_ResimDosyaYolu);
                     }
@@ -165,7 +162,7 @@ namespace Etiket
                         {
                             if (Resim_Çerçeve_Yolu_ == null)
                             {
-                                Resim_Çerçeve_Yolu_ = new GraphicsPath();
+                                Resim_Çerçeve_Yolu_ = new System.Drawing.Drawing2D.GraphicsPath();
                                 float EtKalınlığı_Bölü2 = EtKalınlığı / 2;
                                 RectangleF çember = new RectangleF(Çerçeve.X + EtKalınlığı_Bölü2, Çerçeve.Y + EtKalınlığı_Bölü2, Çerçeve.Width - EtKalınlığı, Çerçeve.Height - EtKalınlığı);
 
@@ -268,9 +265,9 @@ namespace Etiket
                 Resim_Kalem_?.Dispose(); Resim_Kalem_ = null;
                 Resim_Çerçeve_Yolu_?.Dispose(); Resim_Çerçeve_Yolu_ = null;
             }
-            public void Depo_Kaydet(Depo_ Ayarlar)
+            public void Depo_Kaydet(IDepo_Eleman ŞablonDalı)
             {
-                IDepo_Eleman Detaylar = Ayarlar["Görseller/" + Adı];
+                IDepo_Eleman Detaylar = ŞablonDalı["Görseller/" + Adı];
 
                 Detaylar.Adı = Adı;
                 Detaylar.Yaz(null, Yazı_1_Resim_0, 0);
@@ -293,18 +290,20 @@ namespace Etiket
                 Detaylar.Yaz("Resim", Resim_Yuvarlama_Çap);
             }
         }
-        public static void Görseller_DizisiniOluştur(bool ÖnTanımlıGörselleriEkle, bool GüncelDeğerleriKullan, bool BoşluklarıEkle)
+        public static void Görseller_DizisiniOluştur(IDepo_Eleman ŞablonDalı, bool ÖnTanımlıGörselleriEkle, bool GüncelDeğerleriKullan, bool BoşluklarıEkle)
         {
+            Depo_Şablon = ŞablonDalı;
+
             if (ÖnTanımlıGörselleriEkle)
             {
                 IDepo_Eleman Tanımlılar = Depo_Komut["Ön Tanımlı Görseller"];
                 foreach (IDepo_Eleman Tanımlı in Tanımlılar.Elemanları)
                 {
-                    IDepo_Eleman değişken = Depo_Ayarlar.Bul("Görseller/" + Tanımlı.Adı);
+                    IDepo_Eleman değişken = Depo_Şablon.Bul("Görseller/" + Tanımlı.Adı);
                     if (değişken == null)
                     {
-                        Depo_Ayarlar.Yaz("Görseller/" + Tanımlı.Adı, Tanımlı[0]); //Yazı_1_Resim_0
-                        Depo_Ayarlar.Yaz("Görseller/" + Tanımlı.Adı + "/İçerik", Tanımlı[1]); //İçerik
+                        Depo_Şablon.Yaz("Görseller/" + Tanımlı.Adı, Tanımlı[0]); //Yazı_1_Resim_0
+                        Depo_Şablon.Yaz("Görseller/" + Tanımlı.Adı + "/İçerik", Tanımlı[1]); //İçerik
                     }
                 }
             }
@@ -314,7 +313,7 @@ namespace Etiket
                 IDepo_Eleman Değişiklikler = Depo_Komut["Görsellerin Güncel Değerleri"];
                 foreach (IDepo_Eleman Değişiklik in Değişiklikler.Elemanları)
                 {
-                    IDepo_Eleman değişken = Depo_Ayarlar.Bul("Görseller/" + Değişiklik.Adı);
+                    IDepo_Eleman değişken = Depo_Şablon.Bul("Görseller/" + Değişiklik.Adı);
                     if (değişken != null)
                     {
                         değişken["İçerik", 0] = Değişiklik[0];
@@ -322,12 +321,12 @@ namespace Etiket
                 }
             }
 
-            Görsel_ler = new Görsel[Depo_Ayarlar["Görseller"].Elemanları.Length];
-            SizeF Boşluk = new SizeF((float)Depo_Ayarlar.Oku_Sayı("Yazıcı", 0, 1), (float)Depo_Ayarlar.Oku_Sayı("Yazıcı", 0, 2));
+            Görsel_ler = new Görsel[Depo_Şablon["Görseller"].Elemanları.Length];
+            SizeF Boşluk = new SizeF((float)Depo_Şablon.Oku_Sayı("Yazıcı", 0, 1), (float)Depo_Şablon.Oku_Sayı("Yazıcı", 0, 2));
          
             for (int i = 0; i < Görsel_ler.Length; i++)
             {
-                Görsel G = new Görsel(Depo_Ayarlar["Görseller"].Elemanları[i]);
+                Görsel G = new Görsel(Depo_Şablon["Görseller"].Elemanları[i]);
                 if (BoşluklarıEkle) G.Çerçeve.Location = PointF.Add(G.Çerçeve.Location, Boşluk); //yazıcı ölü alanının eklenmesi
                 Görsel_ler[i] = G;
             }
@@ -358,7 +357,7 @@ namespace Etiket
                     if (YakınlaşmaOranı != 1) Grafik.ScaleTransform(YakınlaşmaOranı, YakınlaşmaOranı);
                     Görsel_ler[i].Çizdir(Grafik, false);
                 }
-                catch (Exception ex)
+                catch (System.Exception ex)
                 {
                     Grafik.ResetTransform();
                     Hatalar += Görsel_ler[i].Adı + " -> " + ex.Message;
@@ -373,7 +372,7 @@ namespace Etiket
                     if (YakınlaşmaOranı != 1) Grafik.ScaleTransform(YakınlaşmaOranı, YakınlaşmaOranı);
                     SeçiliGörsel.Çizdir(Grafik, true);
                 }
-                catch (Exception ex)
+                catch (System.Exception ex)
                 {
                     Grafik.ResetTransform();
                     Hatalar += SeçiliGörsel.Adı + " -> " + ex.Message;
@@ -386,8 +385,8 @@ namespace Etiket
         {
             string Hatalar = null;
 
-            PrintDocument pd = new PrintDocument();
-            pd.PrinterSettings.PrinterName = Depo_Ayarlar.Oku("Yazıcı", null, 0);
+            System.Drawing.Printing.PrintDocument pd = new System.Drawing.Printing.PrintDocument();
+            pd.PrinterSettings.PrinterName = Depo_Şablon.Oku("Yazıcı", null, 0);
             pd.OriginAtMargins = false;
             pd.PrintPage += pd_Yazdır;
             if (pd.PrinterSettings.IsValid) pd.Print();
@@ -395,7 +394,7 @@ namespace Etiket
             pd.Dispose();
             return Hatalar;
 
-            void pd_Yazdır(object senderr, PrintPageEventArgs ev)
+            void pd_Yazdır(object senderr, System.Drawing.Printing.PrintPageEventArgs ev)
             {
                 Hatalar += Görseller_Görseli_Üret(ev.Graphics);
             }

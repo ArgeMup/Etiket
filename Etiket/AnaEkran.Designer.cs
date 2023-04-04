@@ -73,12 +73,19 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.Görsel_Eleman_Adı = new System.Windows.Forms.TextBox();
             this.lbl9 = new System.Windows.Forms.Label();
+            this.Görsel_Çıktı_ArkaPlanRenk = new System.Windows.Forms.CheckBox();
             this.Görsel_Çıktı_Yükseklik = new System.Windows.Forms.NumericUpDown();
             this.Görsel_Çıktı_Genişlik = new System.Windows.Forms.NumericUpDown();
             this.İpUcu = new System.Windows.Forms.ToolTip(this.components);
+            this.Şablon_Sil = new System.Windows.Forms.Button();
+            this.Şablon_Ekle = new System.Windows.Forms.Button();
+            this.Şablon_Şablonlar = new System.Windows.Forms.CheckedListBox();
+            this.Şablon_Adı = new System.Windows.Forms.TextBox();
+            this.Şablon_Kopyala = new System.Windows.Forms.Button();
             this.Sayfalar = new System.Windows.Forms.TabControl();
+            this.Sayfa_Şablon = new System.Windows.Forms.TabPage();
             this.Sayfa_Görsel = new System.Windows.Forms.TabPage();
-            this.Yazıcı = new System.Windows.Forms.TabPage();
+            this.Sayfa_Yazıcı = new System.Windows.Forms.TabPage();
             this.Yazıcı_Yazdır = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
             this.Yazıcı_Sol = new System.Windows.Forms.NumericUpDown();
@@ -88,7 +95,6 @@
             this.Yazıcı_Açıklama = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.Kaydet = new System.Windows.Forms.Button();
-            this.Görsel_Çıktı_ArkaPlanRenk = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.Görsel_Çıktı)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Görsel_Çıktı_Yakınlaştırma)).BeginInit();
             this.panel1.SuspendLayout();
@@ -115,8 +121,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.Görsel_Çıktı_Yükseklik)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Görsel_Çıktı_Genişlik)).BeginInit();
             this.Sayfalar.SuspendLayout();
+            this.Sayfa_Şablon.SuspendLayout();
             this.Sayfa_Görsel.SuspendLayout();
-            this.Yazıcı.SuspendLayout();
+            this.Sayfa_Yazıcı.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Yazıcı_Sol)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Yazıcı_Üst)).BeginInit();
             this.SuspendLayout();
@@ -344,8 +351,7 @@
             this.Görsel_Eleman_Resim_DosyaYolu.Name = "Görsel_Eleman_Resim_DosyaYolu";
             this.Görsel_Eleman_Resim_DosyaYolu.Size = new System.Drawing.Size(37, 20);
             this.Görsel_Eleman_Resim_DosyaYolu.TabIndex = 21;
-            this.İpUcu.SetToolTip(this.Görsel_Eleman_Resim_DosyaYolu, "Genişlik 0 yapılarak resmin gerçek boyutu kullanılabilir.\r\n\r\nBu durumda sol ve üs" +
-        "t ölçülerinin birimi mm değil piksel olarak değerlendirilir.");
+            this.İpUcu.SetToolTip(this.Görsel_Eleman_Resim_DosyaYolu, resources.GetString("Görsel_Eleman_Resim_DosyaYolu.ToolTip"));
             this.Görsel_Eleman_Resim_DosyaYolu.TextChanged += new System.EventHandler(this.Görsel_Ayar_Değişti);
             // 
             // label10
@@ -746,6 +752,24 @@
             this.lbl9.TabIndex = 24;
             this.lbl9.Text = "Ad";
             // 
+            // Görsel_Çıktı_ArkaPlanRenk
+            // 
+            this.Görsel_Çıktı_ArkaPlanRenk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.Görsel_Çıktı_ArkaPlanRenk.Appearance = System.Windows.Forms.Appearance.Button;
+            this.Görsel_Çıktı_ArkaPlanRenk.AutoSize = true;
+            this.Görsel_Çıktı_ArkaPlanRenk.Checked = true;
+            this.Görsel_Çıktı_ArkaPlanRenk.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.Görsel_Çıktı_ArkaPlanRenk.FlatAppearance.CheckedBackColor = System.Drawing.Color.GreenYellow;
+            this.Görsel_Çıktı_ArkaPlanRenk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Görsel_Çıktı_ArkaPlanRenk.Location = new System.Drawing.Point(754, 73);
+            this.Görsel_Çıktı_ArkaPlanRenk.Name = "Görsel_Çıktı_ArkaPlanRenk";
+            this.Görsel_Çıktı_ArkaPlanRenk.Size = new System.Drawing.Size(90, 23);
+            this.Görsel_Çıktı_ArkaPlanRenk.TabIndex = 27;
+            this.Görsel_Çıktı_ArkaPlanRenk.Text = "Arkaplan Rengi";
+            this.İpUcu.SetToolTip(this.Görsel_Çıktı_ArkaPlanRenk, "Yazının arkaplanının rengi");
+            this.Görsel_Çıktı_ArkaPlanRenk.UseVisualStyleBackColor = true;
+            this.Görsel_Çıktı_ArkaPlanRenk.CheckedChanged += new System.EventHandler(this.Görsel_Çıktı_ArkaPlanRenk_CheckedChanged);
+            // 
             // Görsel_Çıktı_Yükseklik
             // 
             this.Görsel_Çıktı_Yükseklik.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -800,10 +824,72 @@
             this.İpUcu.UseAnimation = false;
             this.İpUcu.UseFading = false;
             // 
+            // Şablon_Sil
+            // 
+            this.Şablon_Sil.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.Şablon_Sil.BackColor = System.Drawing.Color.Salmon;
+            this.Şablon_Sil.Location = new System.Drawing.Point(788, 181);
+            this.Şablon_Sil.Name = "Şablon_Sil";
+            this.Şablon_Sil.Size = new System.Drawing.Size(61, 31);
+            this.Şablon_Sil.TabIndex = 24;
+            this.Şablon_Sil.Text = "Sil";
+            this.İpUcu.SetToolTip(this.Şablon_Sil, "Seçilen Şablonu Sil");
+            this.Şablon_Sil.UseVisualStyleBackColor = false;
+            this.Şablon_Sil.Click += new System.EventHandler(this.Şablon_Sil_Click);
+            // 
+            // Şablon_Ekle
+            // 
+            this.Şablon_Ekle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.Şablon_Ekle.BackColor = System.Drawing.Color.YellowGreen;
+            this.Şablon_Ekle.Location = new System.Drawing.Point(788, 255);
+            this.Şablon_Ekle.Name = "Şablon_Ekle";
+            this.Şablon_Ekle.Size = new System.Drawing.Size(61, 31);
+            this.Şablon_Ekle.TabIndex = 25;
+            this.Şablon_Ekle.Text = "Ekle";
+            this.İpUcu.SetToolTip(this.Şablon_Ekle, "Yeni Şablonu Ekle");
+            this.Şablon_Ekle.UseVisualStyleBackColor = false;
+            this.Şablon_Ekle.Click += new System.EventHandler(this.Şablon_Ekle_Click);
+            // 
+            // Şablon_Şablonlar
+            // 
+            this.Şablon_Şablonlar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Şablon_Şablonlar.FormattingEnabled = true;
+            this.Şablon_Şablonlar.Location = new System.Drawing.Point(3, 3);
+            this.Şablon_Şablonlar.Name = "Şablon_Şablonlar";
+            this.Şablon_Şablonlar.Size = new System.Drawing.Size(851, 288);
+            this.Şablon_Şablonlar.TabIndex = 23;
+            this.İpUcu.SetToolTip(this.Şablon_Şablonlar, "Listedeki üstteki görsel alttakinin üzerine çizilir.");
+            this.Şablon_Şablonlar.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.Şablon_Şablonlar_ItemCheck);
+            this.Şablon_Şablonlar.SelectedIndexChanged += new System.EventHandler(this.Şablon_Şablonlar_SelectedIndexChanged);
+            // 
+            // Şablon_Adı
+            // 
+            this.Şablon_Adı.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.Şablon_Adı.BackColor = System.Drawing.SystemColors.Menu;
+            this.Şablon_Adı.Location = new System.Drawing.Point(611, 261);
+            this.Şablon_Adı.Name = "Şablon_Adı";
+            this.Şablon_Adı.Size = new System.Drawing.Size(171, 20);
+            this.Şablon_Adı.TabIndex = 27;
+            this.İpUcu.SetToolTip(this.Şablon_Adı, "Yeni Şablonun Adı");
+            // 
+            // Şablon_Kopyala
+            // 
+            this.Şablon_Kopyala.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.Şablon_Kopyala.BackColor = System.Drawing.Color.LightBlue;
+            this.Şablon_Kopyala.Location = new System.Drawing.Point(788, 218);
+            this.Şablon_Kopyala.Name = "Şablon_Kopyala";
+            this.Şablon_Kopyala.Size = new System.Drawing.Size(61, 31);
+            this.Şablon_Kopyala.TabIndex = 28;
+            this.Şablon_Kopyala.Text = "Kopyala";
+            this.İpUcu.SetToolTip(this.Şablon_Kopyala, "Seçilen Şablonu Yeni Bir İsim İle Kopyalar");
+            this.Şablon_Kopyala.UseVisualStyleBackColor = false;
+            this.Şablon_Kopyala.Click += new System.EventHandler(this.Şablon_Kopyala_Click);
+            // 
             // Sayfalar
             // 
+            this.Sayfalar.Controls.Add(this.Sayfa_Şablon);
             this.Sayfalar.Controls.Add(this.Sayfa_Görsel);
-            this.Sayfalar.Controls.Add(this.Yazıcı);
+            this.Sayfalar.Controls.Add(this.Sayfa_Yazıcı);
             this.Sayfalar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Sayfalar.Location = new System.Drawing.Point(0, 0);
             this.Sayfalar.Name = "Sayfalar";
@@ -811,6 +897,21 @@
             this.Sayfalar.Size = new System.Drawing.Size(865, 320);
             this.Sayfalar.TabIndex = 14;
             this.Sayfalar.SelectedIndexChanged += new System.EventHandler(this.Sayfalar_SelectedIndexChanged);
+            // 
+            // Sayfa_Şablon
+            // 
+            this.Sayfa_Şablon.BackColor = System.Drawing.SystemColors.Control;
+            this.Sayfa_Şablon.Controls.Add(this.Şablon_Kopyala);
+            this.Sayfa_Şablon.Controls.Add(this.Şablon_Adı);
+            this.Sayfa_Şablon.Controls.Add(this.Şablon_Sil);
+            this.Sayfa_Şablon.Controls.Add(this.Şablon_Ekle);
+            this.Sayfa_Şablon.Controls.Add(this.Şablon_Şablonlar);
+            this.Sayfa_Şablon.Location = new System.Drawing.Point(4, 22);
+            this.Sayfa_Şablon.Name = "Sayfa_Şablon";
+            this.Sayfa_Şablon.Padding = new System.Windows.Forms.Padding(3);
+            this.Sayfa_Şablon.Size = new System.Drawing.Size(857, 294);
+            this.Sayfa_Şablon.TabIndex = 2;
+            this.Sayfa_Şablon.Text = "Şablon";
             // 
             // Sayfa_Görsel
             // 
@@ -823,23 +924,23 @@
             this.Sayfa_Görsel.TabIndex = 0;
             this.Sayfa_Görsel.Text = "Görsel";
             // 
-            // Yazıcı
+            // Sayfa_Yazıcı
             // 
-            this.Yazıcı.BackColor = System.Drawing.SystemColors.Control;
-            this.Yazıcı.Controls.Add(this.Yazıcı_Yazdır);
-            this.Yazıcı.Controls.Add(this.label11);
-            this.Yazıcı.Controls.Add(this.Yazıcı_Sol);
-            this.Yazıcı.Controls.Add(this.label12);
-            this.Yazıcı.Controls.Add(this.Yazıcı_Üst);
-            this.Yazıcı.Controls.Add(this.Yazıcı_Yazıcılar);
-            this.Yazıcı.Controls.Add(this.Yazıcı_Açıklama);
-            this.Yazıcı.Controls.Add(this.label1);
-            this.Yazıcı.Location = new System.Drawing.Point(4, 22);
-            this.Yazıcı.Name = "Yazıcı";
-            this.Yazıcı.Padding = new System.Windows.Forms.Padding(3);
-            this.Yazıcı.Size = new System.Drawing.Size(857, 294);
-            this.Yazıcı.TabIndex = 1;
-            this.Yazıcı.Text = "Yazıcı";
+            this.Sayfa_Yazıcı.BackColor = System.Drawing.SystemColors.Control;
+            this.Sayfa_Yazıcı.Controls.Add(this.Yazıcı_Yazdır);
+            this.Sayfa_Yazıcı.Controls.Add(this.label11);
+            this.Sayfa_Yazıcı.Controls.Add(this.Yazıcı_Sol);
+            this.Sayfa_Yazıcı.Controls.Add(this.label12);
+            this.Sayfa_Yazıcı.Controls.Add(this.Yazıcı_Üst);
+            this.Sayfa_Yazıcı.Controls.Add(this.Yazıcı_Yazıcılar);
+            this.Sayfa_Yazıcı.Controls.Add(this.Yazıcı_Açıklama);
+            this.Sayfa_Yazıcı.Controls.Add(this.label1);
+            this.Sayfa_Yazıcı.Location = new System.Drawing.Point(4, 22);
+            this.Sayfa_Yazıcı.Name = "Sayfa_Yazıcı";
+            this.Sayfa_Yazıcı.Padding = new System.Windows.Forms.Padding(3);
+            this.Sayfa_Yazıcı.Size = new System.Drawing.Size(857, 294);
+            this.Sayfa_Yazıcı.TabIndex = 1;
+            this.Sayfa_Yazıcı.Text = "Yazıcı";
             // 
             // Yazıcı_Yazdır
             // 
@@ -921,6 +1022,7 @@
             // 
             // Yazıcı_Yazıcılar
             // 
+            this.Yazıcı_Yazıcılar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.Yazıcı_Yazıcılar.FormattingEnabled = true;
             this.Yazıcı_Yazıcılar.Location = new System.Drawing.Point(93, 10);
             this.Yazıcı_Yazıcılar.Name = "Yazıcı_Yazıcılar";
@@ -959,24 +1061,6 @@
             this.Kaydet.Text = "KAYDET";
             this.Kaydet.UseVisualStyleBackColor = false;
             this.Kaydet.Click += new System.EventHandler(this.Kaydet_Click);
-            // 
-            // Görsel_Çıktı_ArkaPlanRenk
-            // 
-            this.Görsel_Çıktı_ArkaPlanRenk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.Görsel_Çıktı_ArkaPlanRenk.Appearance = System.Windows.Forms.Appearance.Button;
-            this.Görsel_Çıktı_ArkaPlanRenk.AutoSize = true;
-            this.Görsel_Çıktı_ArkaPlanRenk.Checked = true;
-            this.Görsel_Çıktı_ArkaPlanRenk.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.Görsel_Çıktı_ArkaPlanRenk.FlatAppearance.CheckedBackColor = System.Drawing.Color.GreenYellow;
-            this.Görsel_Çıktı_ArkaPlanRenk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Görsel_Çıktı_ArkaPlanRenk.Location = new System.Drawing.Point(754, 73);
-            this.Görsel_Çıktı_ArkaPlanRenk.Name = "Görsel_Çıktı_ArkaPlanRenk";
-            this.Görsel_Çıktı_ArkaPlanRenk.Size = new System.Drawing.Size(90, 23);
-            this.Görsel_Çıktı_ArkaPlanRenk.TabIndex = 27;
-            this.Görsel_Çıktı_ArkaPlanRenk.Text = "Arkaplan Rengi";
-            this.İpUcu.SetToolTip(this.Görsel_Çıktı_ArkaPlanRenk, "Yazının arkaplanının rengi");
-            this.Görsel_Çıktı_ArkaPlanRenk.UseVisualStyleBackColor = true;
-            this.Görsel_Çıktı_ArkaPlanRenk.CheckedChanged += new System.EventHandler(this.Görsel_Çıktı_ArkaPlanRenk_CheckedChanged);
             // 
             // AnaEkran
             // 
@@ -1021,9 +1105,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.Görsel_Çıktı_Yükseklik)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Görsel_Çıktı_Genişlik)).EndInit();
             this.Sayfalar.ResumeLayout(false);
+            this.Sayfa_Şablon.ResumeLayout(false);
+            this.Sayfa_Şablon.PerformLayout();
             this.Sayfa_Görsel.ResumeLayout(false);
-            this.Yazıcı.ResumeLayout(false);
-            this.Yazıcı.PerformLayout();
+            this.Sayfa_Yazıcı.ResumeLayout(false);
+            this.Sayfa_Yazıcı.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Yazıcı_Sol)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Yazıcı_Üst)).EndInit();
             this.ResumeLayout(false);
@@ -1068,7 +1154,7 @@
         private System.Windows.Forms.ToolTip İpUcu;
         private System.Windows.Forms.TabControl Sayfalar;
         private System.Windows.Forms.TabPage Sayfa_Görsel;
-        private System.Windows.Forms.TabPage Yazıcı;
+        private System.Windows.Forms.TabPage Sayfa_Yazıcı;
         private System.Windows.Forms.ComboBox Yazıcı_Yazıcılar;
         private System.Windows.Forms.Label Yazıcı_Açıklama;
         private System.Windows.Forms.Label label1;
@@ -1091,6 +1177,12 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.CheckBox Görsel_Çıktı_Sürüklenebilir;
         private System.Windows.Forms.CheckBox Görsel_Çıktı_ArkaPlanRenk;
+        private System.Windows.Forms.TabPage Sayfa_Şablon;
+        private System.Windows.Forms.TextBox Şablon_Adı;
+        private System.Windows.Forms.Button Şablon_Sil;
+        private System.Windows.Forms.Button Şablon_Ekle;
+        private System.Windows.Forms.CheckedListBox Şablon_Şablonlar;
+        private System.Windows.Forms.Button Şablon_Kopyala;
     }
 }
 
