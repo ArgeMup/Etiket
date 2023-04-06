@@ -79,23 +79,23 @@ namespace Etiket
 
             if (Ortak.Depo_Komut["Komut", 0] == "Yazdır")
             {
+                bool EnAz1EtkinŞablonVar = false;
                 string snç_genel = null;
 
-                if (Şablonlar.Elemanları.Length == 0)
+                for (int i = 0; i < Şablonlar.Elemanları.Length; i++)
                 {
-                    snç_genel = "Hiç Şablon bulunamadı.";
+                    if (!Şablonlar.Elemanları[i].Oku_Bit(null)) continue; //Etkin?
+                    EnAz1EtkinŞablonVar = true;
+
+                    Ortak.Görseller_DizisiniOluştur(Şablonlar.Elemanları[i], false, true, true);
+
+                    string snç_şablon = Ortak.Görseller_Görseli_Yazdır();
+                    if (!System.String.IsNullOrEmpty(snç_şablon)) snç_genel += Şablonlar.Elemanları[i].Adı + " -> " + snç_şablon + System.Environment.NewLine + System.Environment.NewLine;
                 }
-                else
+
+                if (!EnAz1EtkinŞablonVar)
                 {
-                    for (int i = 0; i < Şablonlar.Elemanları.Length; i++)
-                    {
-                        if (!Şablonlar.Elemanları[i].Oku_Bit(null)) continue; //Etkin?
-
-                        Ortak.Görseller_DizisiniOluştur(Şablonlar.Elemanları[i], false, true, true);
-
-                        string snç_şablon = Ortak.Görseller_Görseli_Yazdır();
-                        if (!System.String.IsNullOrEmpty(snç_şablon)) snç_genel += Şablonlar.Elemanları[i].Adı + " -> " + snç_şablon + System.Environment.NewLine + System.Environment.NewLine;
-                    }
+                    snç_genel = "Hiç etkin şablon bulunamadı.";
                 }
 
                 if (!System.String.IsNullOrEmpty(snç_genel)) File.WriteAllText(Kendi.Klasörü + "\\Hatalar.txt", snç_genel);
@@ -106,40 +106,40 @@ namespace Etiket
             {
                 string snç_genel = null;
                 int adet = Şablonlar.Elemanları.Length;
+                bool EnAz1EtkinŞablonVar = false;
 
-                if (adet == 0)
+                for (int i = 0; i < adet; i++)
                 {
-                    snç_genel = "Hiç Şablon bulunamadı.";
-                }
-                else
-                {
-                    for (int i = 0; i < adet; i++)
+                    if (!Şablonlar.Elemanları[i].Oku_Bit(null)) continue; //Etkin?
+					EnAz1EtkinŞablonVar = true;
+
+                    Ortak.Görseller_DizisiniOluştur(Şablonlar.Elemanları[i], false, true, false);
+
+                    Ortak.ArkaPlanRengi = Ortak.Renge(Ortak.Depo_Şablon.Oku_BaytDizisi("Kağıt"), System.Drawing.Color.Transparent);
+                    Ortak.KullanılabilirAlan_mm = new System.Drawing.SizeF((float)Ortak.Depo_Şablon.Oku_Sayı("Kağıt", 50, 1), (float)Ortak.Depo_Şablon.Oku_Sayı("Kağıt", 30, 2));
+                    Ortak.KullanılabilirAlan_piksel_Resim = new System.Drawing.Size((int)(Ortak.KullanılabilirAlan_mm.Width * Ortak.YakınlaşmaOranı / 0.254), (int)(Ortak.KullanılabilirAlan_mm.Height * Ortak.YakınlaşmaOranı / 0.254));
+
+                    string snç_şablon = Ortak.Görseller_Görseli_ResimHalineGetir(out System.Drawing.Image Resim);
+                    if (!System.String.IsNullOrEmpty(snç_şablon)) snç_genel += Şablonlar.Elemanları[i].Adı + " -> " + snç_şablon + System.Environment.NewLine + System.Environment.NewLine;
+
+                    try
                     {
-                        if (!Şablonlar.Elemanları[i].Oku_Bit(null)) continue; //Etkin?
+                        string kls = Path.GetDirectoryName(Ortak.Depo_Komut["Komut", 1]);
+                        Klasör.Oluştur(kls);
 
-                        Ortak.Görseller_DizisiniOluştur(Şablonlar.Elemanları[i], false, true, false);
+                        string DosyaAdı = adet == 1 ? Ortak.Depo_Komut["Komut", 1] : Şablonlar.Elemanları[i].Adı + ".png";
 
-                        Ortak.ArkaPlanRengi = Ortak.Renge(Ortak.Depo_Şablon.Oku_BaytDizisi("Kağıt"), System.Drawing.Color.Transparent);
-                        Ortak.KullanılabilirAlan_mm = new System.Drawing.SizeF((float)Ortak.Depo_Şablon.Oku_Sayı("Kağıt", 50, 1), (float)Ortak.Depo_Şablon.Oku_Sayı("Kağıt", 30, 2));
-                        Ortak.KullanılabilirAlan_piksel_Resim = new System.Drawing.Size((int)(Ortak.KullanılabilirAlan_mm.Width * Ortak.YakınlaşmaOranı / 0.254), (int)(Ortak.KullanılabilirAlan_mm.Height * Ortak.YakınlaşmaOranı / 0.254));
-
-                        string snç_şablon = Ortak.Görseller_Görseli_ResimHalineGetir(out System.Drawing.Image Resim);
-                        if (!System.String.IsNullOrEmpty(snç_şablon)) snç_genel += Şablonlar.Elemanları[i].Adı + " -> " + snç_şablon + System.Environment.NewLine + System.Environment.NewLine;
-
-                        try
-                        {
-                            string kls = Path.GetDirectoryName(Ortak.Depo_Komut["Komut", 1]);
-                            Klasör.Oluştur(kls);
-
-                            string DosyaAdı = adet == 1 ? Ortak.Depo_Komut["Komut", 1] : Şablonlar.Elemanları[i].Adı + ".png";
-
-                            Resim.Save(DosyaAdı, System.Drawing.Imaging.ImageFormat.Png);
-                        }
-                        catch (System.Exception ex)
-                        {
-                            snç_genel += Şablonlar.Elemanları[i].Adı + " -> " + ex.Message + System.Environment.NewLine + System.Environment.NewLine;
-                        }
+                        Resim.Save(DosyaAdı, System.Drawing.Imaging.ImageFormat.Png);
                     }
+                    catch (System.Exception ex)
+                    {
+                        snç_genel += Şablonlar.Elemanları[i].Adı + " -> " + ex.Message + System.Environment.NewLine + System.Environment.NewLine;
+                    }
+                }
+
+                if (!EnAz1EtkinŞablonVar)
+                {
+                    snç_genel = "Hiç etkin şablon bulunamadı.";
                 }
 
                 if (!System.String.IsNullOrEmpty(snç_genel)) File.WriteAllText(Kendi.Klasörü + "\\Hatalar.txt", snç_genel);

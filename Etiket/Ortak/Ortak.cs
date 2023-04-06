@@ -132,6 +132,7 @@ namespace Etiket
                         }
 
                         Yazı_KarakterKümesi_ = new Font(Yazı_KarakterKümesi, KaBü_, Yazı_Kalın ? FontStyle.Bold : FontStyle.Regular, GraphicsUnit.Millimeter);
+                        if (Yazı_KarakterKümesi_.Name != Yazı_KarakterKümesi_.OriginalFontName) throw new System.Exception("Kayıtlı olan (" + Yazı_KarakterKümesi + ") mevcut karakter kümeleri arasında bulunmadığından açılamadı");
                     }
 
                     if (Renk_ArkaPlan != Color.Transparent) Grafik.FillRectangle(Fırça_ArkaPlan_, Çerçeve);

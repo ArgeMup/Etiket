@@ -315,10 +315,10 @@ namespace Etiket
 
                 if (!Görsel_Eleman_Yazı_KarakterKümesi.Items.Contains(şimdi_seçilen.Yazı_KarakterKümesi))
                 {
-                    Hata_Ekle(Görsel_Elemanlar.Text + " -> Kayıtlı olan (" + şimdi_seçilen.Yazı_KarakterKümesi + ") mevcut karakter kümeleri arasında bulunmadığından değiştirildi");
-                    Görsel_Eleman_Yazı_KarakterKümesi.SelectedIndex = 0;
+                    Hata_Ekle(Görsel_Elemanlar.Text + " -> Kayıtlı olan (" + şimdi_seçilen.Yazı_KarakterKümesi + ") mevcut karakter kümeleri arasında bulunmadığından açılamadı");
+                    //Görsel_Eleman_Yazı_KarakterKümesi.SelectedIndex = 0;
                 }
-                else Görsel_Eleman_Yazı_KarakterKümesi.Text = şimdi_seçilen.Yazı_KarakterKümesi;
+                Görsel_Eleman_Yazı_KarakterKümesi.Text = şimdi_seçilen.Yazı_KarakterKümesi;
                 Görsel_Eleman_Yazı_İçerik.Text = şimdi_seçilen.Yazıİçeriği_Veya_ResimDosyaYolu;
                 Görsel_Eleman_Yazı_Kalın.Checked = şimdi_seçilen.Yazı_Kalın;
                 Görsel_Eleman_Yazı_Yaslama_Yatay.SelectedIndex = şimdi_seçilen.Yazı_Yaslama_Yatay;
