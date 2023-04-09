@@ -354,6 +354,7 @@ namespace Etiket
                     int konumu = Görsel_Elemanlar.Items.IndexOf(gecici.Adı);
                     Görsel_Elemanlar.Items.Insert(konumu, Görsel_Eleman_Adı.Text);
                     Görsel_Elemanlar.Items.RemoveAt(konumu + 1);
+                    Görsel_Elemanlar.SetItemChecked(konumu, gecici.Görünsün);
                     Görsel_Elemanlar.SelectedIndex = konumu;
 
                     gecici.Adı = Görsel_Eleman_Adı.Text;
@@ -445,7 +446,10 @@ namespace Etiket
             if (e.Index < 0) return; 
 
             string adı = Görsel_Elemanlar.Items[e.Index].ToString();
-            Ortak.Görseller_Görseli_Bul(adı).Görünsün = e.NewValue == CheckState.Checked;
+            Ortak.Görsel g = Ortak.Görseller_Görseli_Bul(adı);
+            
+            if (g == null) return;
+            g.Görünsün = e.NewValue == CheckState.Checked;
 
             Görsel_Çizdir();
             Kaydet.Enabled = true;
