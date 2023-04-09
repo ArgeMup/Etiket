@@ -6,18 +6,16 @@ Genel amaçlı etiket üretme ve yazdırma uygulaması ArgeMup@yandex.com
     Komut satırından kullanım
         Seçenek 1 - Etiket.exe <Komut Verme Depo Dosyasının Yolu>
         Seçenek 2 - Etiket.exe <Komut Verme Depo Dosyası İçeriğinin Base64 Hali>
-        Seçenek 3 - Etiket.exe YeniYazilimKontrolu                                  (Kontrolü bitirip kapanır)
-        Seçenek 4 - Etiket.exe                                                      (Bu durumda değişiklikleri kendi alt klasörüne kaydeder)
+        Seçenek 3 - Etiket.exe YeniYazilimKontrolu                                      (Kontrolü bitirip kapanır)
+        Seçenek 4 - Etiket.exe                                                          (Bu durumda değişiklikleri kendi alt klasörüne kaydeder)
 
     Komut Verme Depo Dosyası İçeriği
         Komut / Ayarla VEYA
         Komut / Yazdır VEYA
-        Komut / Dosyaya Kaydet / Dosya adı
+        Komut / Dosyaya Kaydet / <Kaydedilecek Klasörün Yolu>                           (Dosya adı -> <Şablon Adı>.png)
         Ayarlar / <Ayarlar Depo Dosya Yolu>
-        Görsellerin Güncel Değerleri (Sadece yazdırma işlemi için anlamlı)
-            <Görsel Adı> / Yazı ise -> <İçerik>, Resim ise -> <Resim Dosya Yolu>
-        Ön Tanımlı Görseller (Sadece ayarla işlemi için anlamlı)
-            <Görsel Adı> / bit <Yazı_1_Resim_0> / Yazı ise -> <İçerik>, Resim ise -> <Resim Dosya Yolu>
+        Değişkenler                                                                     (Çağıran uygulamanın eklediği değişkenler - kullanıcı silemez)
+            <Değişken Adı> / <İçeriği>
 
     Ayarlar Depo Dosyası İçeriği
         Şablonlar
@@ -30,3 +28,5 @@ Genel amaçlı etiket üretme ve yazdırma uygulaması ArgeMup@yandex.com
                         İçerik / Yazıİçeriği_Veya_ResimDosyaYolu
                         Yazı / KarakterKümesi / Kalın / Yaslama_Yatay / Yaslama_Dikey
                         Resim / Çember çapı
+        Değişkenler                                                                     (Kullanıcının eklediği değişkenler)
+            <Değişken Adı> / <İçeriği>

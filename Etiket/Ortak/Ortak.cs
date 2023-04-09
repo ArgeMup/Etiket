@@ -1,5 +1,6 @@
 ﻿using ArgeMup.HazirKod;
 using ArgeMup.HazirKod.Ekİşlemler;
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace Etiket
@@ -14,6 +15,7 @@ namespace Etiket
         public static Color ArkaPlanRengi = Color.Transparent;
         public static Görsel SeçiliGörsel = null;
         public static float YakınlaşmaOranı = 1;
+        static SolidBrush Fırça_ArkaPlanRengi = null;
 
         public static Color Renge(byte[] Girdi, Color BulunamamasıDurumundakiDeğeri)
         {
@@ -39,8 +41,17 @@ namespace Etiket
             public RectangleF Çerçeve;
             public bool Yazı_1_Resim_0, Görünsün;
             public float Açı, EtKalınlığı;
-            public string Yazıİçeriği_Veya_ResimDosyaYolu;
             public Color Renk, Renk_ArkaPlan;
+
+            public string Yazıİçeriği_Veya_ResimDosyaYolu;
+            public string Yazıİçeriği_Veya_ResimDosyaYolu_Çözümlenmiş
+            {
+                get
+                {
+                    return Değişkenler.Çözümle(Yazıİçeriği_Veya_ResimDosyaYolu);
+                }
+            }
+
             //Genel Yazı
             public string Yazı_KarakterKümesi;
             public int Yazı_Yaslama_Yatay, Yazı_Yaslama_Dikey;
@@ -94,6 +105,8 @@ namespace Etiket
                     Grafik.TranslateTransform(-_x, -_y);
                 }
 
+                string Çözümlenmiş_İçerik = Yazıİçeriği_Veya_ResimDosyaYolu_Çözümlenmiş;
+
                 if (Yazı_1_Resim_0)
                 {
                     if (Yazı_KarakterKümesi_ == null)
@@ -109,16 +122,16 @@ namespace Etiket
                         float KaBü_ = EtKalınlığı;
                         if (KaBü_ == 0)
                         {
-                            if (string.IsNullOrEmpty(Yazıİçeriği_Veya_ResimDosyaYolu)) Yazıİçeriği_Veya_ResimDosyaYolu = " ";
+                            if (string.IsNullOrEmpty(Çözümlenmiş_İçerik)) Çözümlenmiş_İçerik = " ";
 
                             SizeF Ölçü = new SizeF();
-                            int KarakterSayısı = Yazıİçeriği_Veya_ResimDosyaYolu.Length, YazdırılanAdet = KarakterSayısı;
+                            int KarakterSayısı = Çözümlenmiş_İçerik.Length, YazdırılanAdet = KarakterSayısı;
 
                             while (Ölçü.Width < Çerçeve.Width && Ölçü.Height < Çerçeve.Height && KarakterSayısı == YazdırılanAdet)
                             {
                                 KaBü_ += 5;
                                 Yazı_KarakterKümesi_ = new Font(Yazı_KarakterKümesi, KaBü_, Yazı_Kalın ? FontStyle.Bold : FontStyle.Regular, GraphicsUnit.Millimeter);
-                                Ölçü = Grafik.MeasureString(Yazıİçeriği_Veya_ResimDosyaYolu, Yazı_KarakterKümesi_, Çerçeve.Size, Yazı_Şekli_, out YazdırılanAdet, out _);
+                                Ölçü = Grafik.MeasureString(Çözümlenmiş_İçerik, Yazı_KarakterKümesi_, Çerçeve.Size, Yazı_Şekli_, out YazdırılanAdet, out _);
                                 Yazı_KarakterKümesi_.Dispose();
                             }
 
@@ -126,7 +139,7 @@ namespace Etiket
                             {
                                 KaBü_ -= 0.1f;
                                 Yazı_KarakterKümesi_ = new Font(Yazı_KarakterKümesi, KaBü_, Yazı_Kalın ? FontStyle.Bold : FontStyle.Regular, GraphicsUnit.Millimeter);
-                                Ölçü = Grafik.MeasureString(Yazıİçeriği_Veya_ResimDosyaYolu, Yazı_KarakterKümesi_, Çerçeve.Size, Yazı_Şekli_, out YazdırılanAdet, out _);
+                                Ölçü = Grafik.MeasureString(Çözümlenmiş_İçerik, Yazı_KarakterKümesi_, Çerçeve.Size, Yazı_Şekli_, out YazdırılanAdet, out _);
                                 Yazı_KarakterKümesi_.Dispose();
                             }
                         }
@@ -137,14 +150,14 @@ namespace Etiket
 
                     if (Renk_ArkaPlan != Color.Transparent) Grafik.FillRectangle(Fırça_ArkaPlan_, Çerçeve);
 
-                    Grafik.DrawString(Yazıİçeriği_Veya_ResimDosyaYolu, Yazı_KarakterKümesi_, Fırça_, Çerçeve, Yazı_Şekli_);
+                    Grafik.DrawString(Çözümlenmiş_İçerik, Yazı_KarakterKümesi_, Fırça_, Çerçeve, Yazı_Şekli_);
                 }
                 else
                 {
                     //Resimi hazırlama
-                    if (Resim_ == null && Yazıİçeriği_Veya_ResimDosyaYolu.DoluMu(true))
+                    if (Resim_ == null && Çözümlenmiş_İçerik.DoluMu(true))
                     {
-                        Resim_ = Image.FromFile(Yazıİçeriği_Veya_ResimDosyaYolu);
+                        Resim_ = Image.FromFile(Çözümlenmiş_İçerik);
                     }
 
                     if (Çerçeve.Width == 0)
@@ -291,36 +304,9 @@ namespace Etiket
                 Detaylar.Yaz("Resim", Resim_Yuvarlama_Çap);
             }
         }
-        public static void Görseller_DizisiniOluştur(IDepo_Eleman ŞablonDalı, bool ÖnTanımlıGörselleriEkle, bool GüncelDeğerleriKullan, bool BoşluklarıEkle)
+        public static void Görseller_DizisiniOluştur(IDepo_Eleman ŞablonDalı, bool BoşluklarıEkle)
         {
             Depo_Şablon = ŞablonDalı;
-
-            if (ÖnTanımlıGörselleriEkle)
-            {
-                IDepo_Eleman Tanımlılar = Depo_Komut["Ön Tanımlı Görseller"];
-                foreach (IDepo_Eleman Tanımlı in Tanımlılar.Elemanları)
-                {
-                    IDepo_Eleman değişken = Depo_Şablon.Bul("Görseller/" + Tanımlı.Adı);
-                    if (değişken == null)
-                    {
-                        Depo_Şablon.Yaz("Görseller/" + Tanımlı.Adı, Tanımlı[0]); //Yazı_1_Resim_0
-                        Depo_Şablon.Yaz("Görseller/" + Tanımlı.Adı + "/İçerik", Tanımlı[1]); //İçerik
-                    }
-                }
-            }
-
-            if (GüncelDeğerleriKullan)
-            {
-                IDepo_Eleman Değişiklikler = Depo_Komut["Görsellerin Güncel Değerleri"];
-                foreach (IDepo_Eleman Değişiklik in Değişiklikler.Elemanları)
-                {
-                    IDepo_Eleman değişken = Depo_Şablon.Bul("Görseller/" + Değişiklik.Adı);
-                    if (değişken != null)
-                    {
-                        değişken["İçerik", 0] = Değişiklik[0];
-                    }
-                }
-            }
 
             Görsel_ler = new Görsel[Depo_Şablon["Görseller"].Elemanları.Length];
             SizeF Boşluk = new SizeF((float)Depo_Şablon.Oku_Sayı("Yazıcı", 0, 1), (float)Depo_Şablon.Oku_Sayı("Yazıcı", 0, 2));
@@ -331,6 +317,22 @@ namespace Etiket
                 if (BoşluklarıEkle) G.Çerçeve.Location = PointF.Add(G.Çerçeve.Location, Boşluk); //yazıcı ölü alanının eklenmesi
                 Görsel_ler[i] = G;
             }
+        }
+        public static void Görseller_YenidenHesaplat(Color İstenen_ArkaPlanRengi)
+        {
+            ArkaPlanRengi = İstenen_ArkaPlanRengi;
+
+            Fırça_ArkaPlanRengi?.Dispose(); Fırça_ArkaPlanRengi = null;
+            if (İstenen_ArkaPlanRengi != Color.Transparent) Fırça_ArkaPlanRengi = new SolidBrush(İstenen_ArkaPlanRengi);
+        }
+        public static void Görseller_YenidenHesaplat(double İstenen_YakınlaşmaOranı, double İstenen_Genişlik, double İstenen_YÜkseklik)
+        {
+            YakınlaşmaOranı = (float)İstenen_YakınlaşmaOranı;
+
+            KullanılabilirAlan_mm = new SizeF((float)İstenen_Genişlik, (float)İstenen_YÜkseklik);
+
+            float Çarpan = 25.4f / 96.0f; //ekran dpi oranı https://learn.microsoft.com/en-us/windows/win32/learnwin32/dpi-and-device-independent-pixels
+            KullanılabilirAlan_piksel_Resim = new Size((int)(KullanılabilirAlan_mm.Width * YakınlaşmaOranı / Çarpan), (int)(KullanılabilirAlan_mm.Height * YakınlaşmaOranı / Çarpan));
         }
         public static Görsel Görseller_Görseli_Bul(string Adı)
         {
@@ -347,38 +349,47 @@ namespace Etiket
             Grafik.ResetTransform();
             Grafik.PageUnit = GraphicsUnit.Millimeter;
 
-            if (ArkaPlanRengi != Color.Transparent) Grafik.FillRectangle(new SolidBrush(ArkaPlanRengi), 0, 0, KullanılabilirAlan_mm.Width * YakınlaşmaOranı, KullanılabilirAlan_mm.Height * YakınlaşmaOranı);
-
-            for (int i = Görsel_ler.Length - 1; i >= 0; i--)
+            if (ArkaPlanRengi != Color.Transparent)
             {
-                if (!Görsel_ler[i].Görünsün || Görsel_ler[i] == SeçiliGörsel) continue;
-
-                try
-                {
-                    if (YakınlaşmaOranı != 1) Grafik.ScaleTransform(YakınlaşmaOranı, YakınlaşmaOranı);
-                    Görsel_ler[i].Çizdir(Grafik, false);
-                }
-                catch (System.Exception ex)
-                {
-                    Grafik.ResetTransform();
-                    Hatalar += Görsel_ler[i].Adı + " -> " + ex.Message;
-                }
+                if (YakınlaşmaOranı != 1) Grafik.ScaleTransform(YakınlaşmaOranı, YakınlaşmaOranı);
+                Grafik.FillRectangle(Fırça_ArkaPlanRengi, 0, 0, KullanılabilirAlan_mm.Width, KullanılabilirAlan_mm.Height);
+                Grafik.ResetTransform();
             }
 
-            //Seçilenin üstte görünmesi için en son çizdir
-            if (SeçiliGörsel != null && SeçiliGörsel.Görünsün)
+            if (Görsel_ler != null)
             {
-                try
+                for (int i = Görsel_ler.Length - 1; i >= 0; i--)
                 {
-                    if (YakınlaşmaOranı != 1) Grafik.ScaleTransform(YakınlaşmaOranı, YakınlaşmaOranı);
-                    SeçiliGörsel.Çizdir(Grafik, true);
+                    if (!Görsel_ler[i].Görünsün || Görsel_ler[i] == SeçiliGörsel) continue;
+
+                    try
+                    {
+                        if (YakınlaşmaOranı != 1) Grafik.ScaleTransform(YakınlaşmaOranı, YakınlaşmaOranı);
+                        Görsel_ler[i].Çizdir(Grafik, false);
+                    }
+                    catch (System.Exception ex)
+                    {
+                        Grafik.ResetTransform();
+                        Hatalar += Görsel_ler[i].Adı + " -> " + ex.Message;
+                    }
                 }
-                catch (System.Exception ex)
+
+                //Seçilenin üstte görünmesi için en son çizdir
+                if (SeçiliGörsel != null && SeçiliGörsel.Görünsün)
                 {
-                    Grafik.ResetTransform();
-                    Hatalar += SeçiliGörsel.Adı + " -> " + ex.Message;
+                    try
+                    {
+                        if (YakınlaşmaOranı != 1) Grafik.ScaleTransform(YakınlaşmaOranı, YakınlaşmaOranı);
+                        SeçiliGörsel.Çizdir(Grafik, true);
+                    }
+                    catch (System.Exception ex)
+                    {
+                        Grafik.ResetTransform();
+                        Hatalar += SeçiliGörsel.Adı + " -> " + ex.Message;
+                    }
                 }
             }
+            else Hatalar += "Görsel_ler nesnesi boş durumda iken çizildi.";
 
             return Hatalar;
         }
@@ -407,6 +418,79 @@ namespace Etiket
             string Hatalar = Görseller_Görseli_Üret(Grafik);
             Grafik.Dispose();
             return Hatalar;
+        }
+    }
+
+    public static class Değişkenler
+    {
+        //Çözümleme için girilecek değiken adı  -> %Değişken Adı%
+        //liste içerisinde tutulan değişken adı -> Değişken Adı 
+
+        public static Dictionary<string, string> Liste_UygulamaEkledi = new Dictionary<string, string>();
+        public static Dictionary<string, string> Liste_KullanıcıEkledi = new Dictionary<string, string>();
+
+        public static void Başlat()
+        {
+            Liste_UygulamaEkledi.Clear();
+            Liste_KullanıcıEkledi.Clear();
+
+            if (Ortak.Depo_Komut != null)
+            {
+                IDepo_Eleman DeğişkenlerDalı = Ortak.Depo_Komut["Değişkenler"];
+                foreach (IDepo_Eleman Değişken in DeğişkenlerDalı.Elemanları)
+                {
+                    if (Değişken.İçiBoşOlduğuİçinSilinecek) continue;
+
+                    Liste_UygulamaEkledi.Add(Değişken.Adı, Değişken[0]);
+                }
+            }
+
+            if (Ortak.Depo_Ayarlar != null)
+            {
+                IDepo_Eleman DeğişkenlerDalı = Ortak.Depo_Ayarlar["Değişkenler"];
+                foreach (IDepo_Eleman Değişken in DeğişkenlerDalı.Elemanları)
+                {
+                    if (Değişken.İçiBoşOlduğuİçinSilinecek) continue;
+
+                    Liste_KullanıcıEkledi.Add(Değişken.Adı, Değişken[0]);
+                    
+                }
+            }
+        }
+        public static void Kaydet()
+        {
+            IDepo_Eleman DeğişkenlerDalı = Ortak.Depo_Ayarlar["Değişkenler"];
+            DeğişkenlerDalı.Sil(null, true, true);
+
+            foreach (var biri in Liste_KullanıcıEkledi)
+            {
+                DeğişkenlerDalı.Yaz(biri.Key, biri.Value);
+
+                if (biri.Value.BoşMu(true)) DeğişkenlerDalı.Yaz(biri.Key, " ", 1); //boş iiçerikli değişkenin kaybolmaması için
+            }
+        }
+        public static void EkleVeyaDeğiştir(string Adı, string İçeriği)
+        {
+            if (Adı.BoşMu(true)) return;
+
+            if (Liste_KullanıcıEkledi.ContainsKey(Adı)) Liste_KullanıcıEkledi[Adı] = İçeriği;
+            else Liste_KullanıcıEkledi.Add(Adı, İçeriği);
+        }
+        public static string Çözümle(string Girdi)
+        {
+            if (Girdi.BoşMu(true)) return Girdi;
+
+            foreach (var biri in Liste_UygulamaEkledi)
+            {
+                Girdi = Girdi.Replace("%" + biri.Key + "%", biri.Value);
+            }
+
+            foreach (var biri in Liste_KullanıcıEkledi)
+            {
+                Girdi = Girdi.Replace("%" + biri.Key + "%", biri.Value);
+            }
+
+            return Girdi;
         }
     }
 }

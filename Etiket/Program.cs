@@ -17,27 +17,27 @@ namespace Etiket
 
             ////Seçenek 1
             //KomutVermeDeposu["Komut", 0] = "Ayarla";
-            //KomutVermeDeposu["Ön Tanımlı Görseller/Sabit 1"].İçeriği = new string[] { true.ToString(), "_?? Yazı" };
-            //KomutVermeDeposu["Ön Tanımlı Görseller/Sabit 2"].İçeriği = new string[] { false.ToString(), "_?? Resim" };
+            //KomutVermeDeposu["Değişkenler/Değişken 1", 0] = "De 1 içeriği";
+            //KomutVermeDeposu["Değişkenler/Değişken 2", 0] = "De 2 içeriği";
             //BaşlangıçParamaetreleri = new string[] { @"C:\Deneme\Komut.txt" };
             //File.WriteAllText(BaşlangıçParamaetreleri[0], KomutVermeDeposu.YazıyaDönüştür());
 
             ////Seçenek 2 A
             //KomutVermeDeposu["Komut", 0] = "Ayarla";
-            //KomutVermeDeposu["Ön Tanımlı Görseller/Sabit 1"].İçeriği = new string[] { true.ToString(), "_?? Yazı" };
-            //KomutVermeDeposu["Ön Tanımlı Görseller/Sabit 2"].İçeriği = new string[] { false.ToString(), "_?? Resim" };
+            //KomutVermeDeposu["Değişkenler/Değişken 1", 0] = "De 1 içeriği";
+            //KomutVermeDeposu["Değişkenler/Değişken 2", 0] = "De 2 içeriği";
             //BaşlangıçParamaetreleri = new string[] { ArgeMup.HazirKod.Dönüştürme.D_Yazı.Taban64e(KomutVermeDeposu.YazıyaDönüştür()) };
 
             ////Seçenek 2 B
             //KomutVermeDeposu["Komut", 0] = "Yazdır";
-            //KomutVermeDeposu["Görsellerin Güncel Değerleri/Sabit 1", 0] = "Güncel Yazı";
-            //KomutVermeDeposu["Görsellerin Güncel Değerleri/Sabit 2", 0] = @"C:\Deneme\Barkod.png";
+            //KomutVermeDeposu["Değişkenler/Değişken 1", 0] = "De 1 canlı çalışma içeriği";
+            //KomutVermeDeposu["Değişkenler/Değişken 2", 0] = "De 2 canlı çalışma içeriği";
             //BaşlangıçParamaetreleri = new string[] { ArgeMup.HazirKod.Dönüştürme.D_Yazı.Taban64e(KomutVermeDeposu.YazıyaDönüştür()) };
 
             ////Seçenek 2 C
-            //KomutVermeDeposu["Komut"].İçeriği = new string[] { "Dosyaya Kaydet", @"C:\Deneme\Çıktı\Çıktı.png" };
-            //KomutVermeDeposu["Görsellerin Güncel Değerleri/Sabit 1", 0] = "Güncel Yazı";
-            //KomutVermeDeposu["Görsellerin Güncel Değerleri/Sabit 2", 0] = @"C:\Deneme\Barkod.png";
+            //KomutVermeDeposu["Komut"].İçeriği = new string[] { "Dosyaya Kaydet", @"C:\Deneme\Çıktı" };
+            //KomutVermeDeposu["Değişkenler/Değişken 1", 0] = "De 1 canlı çalışma içeriği";
+            //KomutVermeDeposu["Değişkenler/Değişken 2", 0] = "De 2 canlı çalışma içeriği";
             //BaşlangıçParamaetreleri = new string[] { ArgeMup.HazirKod.Dönüştürme.D_Yazı.Taban64e(KomutVermeDeposu.YazıyaDönüştür()) };
 
             ////Seçenek 3
@@ -76,6 +76,7 @@ namespace Etiket
 
             Ortak.Depo_Ayarlar = new Depo_(File.Exists(Ortak.Depo_Komut["Ayarlar", 0]) ? File.ReadAllText(Ortak.Depo_Komut["Ayarlar", 0]) : null);
             IDepo_Eleman Şablonlar = Ortak.Depo_Ayarlar["Şablonlar"];
+            Değişkenler.Başlat();
 
             if (Ortak.Depo_Komut["Komut", 0] == "Yazdır")
             {
@@ -87,10 +88,10 @@ namespace Etiket
                     if (!Şablonlar.Elemanları[i].Oku_Bit(null)) continue; //Etkin?
                     EnAz1EtkinŞablonVar = true;
 
-                    Ortak.Görseller_DizisiniOluştur(Şablonlar.Elemanları[i], false, true, true);
+                    Ortak.Görseller_DizisiniOluştur(Şablonlar.Elemanları[i], true);
 
                     string snç_şablon = Ortak.Görseller_Görseli_Yazdır();
-                    if (!System.String.IsNullOrEmpty(snç_şablon)) snç_genel += Şablonlar.Elemanları[i].Adı + " -> " + snç_şablon + System.Environment.NewLine + System.Environment.NewLine;
+                    if (!string.IsNullOrEmpty(snç_şablon)) snç_genel += Şablonlar.Elemanları[i].Adı + " -> " + snç_şablon + System.Environment.NewLine + System.Environment.NewLine;
                 }
 
                 if (!EnAz1EtkinŞablonVar)
@@ -98,7 +99,7 @@ namespace Etiket
                     snç_genel = "Hiç etkin şablon bulunamadı.";
                 }
 
-                if (!System.String.IsNullOrEmpty(snç_genel)) File.WriteAllText(Kendi.Klasörü + "\\Hatalar.txt", snç_genel);
+                if (!string.IsNullOrEmpty(snç_genel)) File.WriteAllText(Kendi.Klasörü + "\\Hatalar.txt", snç_genel);
                 else if (File.Exists(Kendi.Klasörü + "\\Hatalar.txt")) File.Delete(Kendi.Klasörü + "\\Hatalar.txt");
                 return;
             }
@@ -113,23 +114,17 @@ namespace Etiket
                     if (!Şablonlar.Elemanları[i].Oku_Bit(null)) continue; //Etkin?
 					EnAz1EtkinŞablonVar = true;
 
-                    Ortak.Görseller_DizisiniOluştur(Şablonlar.Elemanları[i], false, true, false);
-
-                    Ortak.ArkaPlanRengi = Ortak.Renge(Ortak.Depo_Şablon.Oku_BaytDizisi("Kağıt"), System.Drawing.Color.Transparent);
-                    Ortak.KullanılabilirAlan_mm = new System.Drawing.SizeF((float)Ortak.Depo_Şablon.Oku_Sayı("Kağıt", 50, 1), (float)Ortak.Depo_Şablon.Oku_Sayı("Kağıt", 30, 2));
-                    Ortak.KullanılabilirAlan_piksel_Resim = new System.Drawing.Size((int)(Ortak.KullanılabilirAlan_mm.Width * Ortak.YakınlaşmaOranı / 0.254), (int)(Ortak.KullanılabilirAlan_mm.Height * Ortak.YakınlaşmaOranı / 0.254));
+                    Ortak.Görseller_DizisiniOluştur(Şablonlar.Elemanları[i], false);
+                    Ortak.Görseller_YenidenHesaplat(Ortak.Renge(Ortak.Depo_Şablon.Oku_BaytDizisi("Kağıt"), System.Drawing.Color.Transparent));
+                    Ortak.Görseller_YenidenHesaplat(1, Ortak.Depo_Şablon.Oku_Sayı("Kağıt", 50, 1), Ortak.Depo_Şablon.Oku_Sayı("Kağıt", 30, 2));
 
                     string snç_şablon = Ortak.Görseller_Görseli_ResimHalineGetir(out System.Drawing.Image Resim);
-                    if (!System.String.IsNullOrEmpty(snç_şablon)) snç_genel += Şablonlar.Elemanları[i].Adı + " -> " + snç_şablon + System.Environment.NewLine + System.Environment.NewLine;
+                    if (!string.IsNullOrEmpty(snç_şablon)) snç_genel += Şablonlar.Elemanları[i].Adı + " -> " + snç_şablon + System.Environment.NewLine + System.Environment.NewLine;
 
                     try
                     {
-                        string kls = Path.GetDirectoryName(Ortak.Depo_Komut["Komut", 1]);
-                        Klasör.Oluştur(kls);
-
-                        string DosyaAdı = adet == 1 ? Ortak.Depo_Komut["Komut", 1] : Şablonlar.Elemanları[i].Adı + ".png";
-
-                        Resim.Save(DosyaAdı, System.Drawing.Imaging.ImageFormat.Png);
+                        Klasör.Oluştur(Ortak.Depo_Komut["Komut", 1]);
+                        Resim.Save(Ortak.Depo_Komut["Komut", 1] + "\\" + Şablonlar.Elemanları[i].Adı + ".png", System.Drawing.Imaging.ImageFormat.Png);
                     }
                     catch (System.Exception ex)
                     {
