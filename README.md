@@ -11,7 +11,7 @@ Genel amaçlı etiket üretme ve yazdırma uygulaması ArgeMup@yandex.com
 
     Komut Verme Depo Dosyası İçeriği
         Komut / Ayarla VEYA
-        Komut / Yazdır VEYA
+        Komut / Yazdır VEYA / Kopya Sayısı
         Komut / Dosyaya Kaydet / <Kaydedilecek Klasörün Yolu>                           (Dosya adı -> <Şablon Adı>.png)
         Ayarlar / <Ayarlar Depo Dosya Yolu>
         Değişkenler                                                                     (Çağıran uygulamanın eklediği değişkenler - kullanıcı silemez)

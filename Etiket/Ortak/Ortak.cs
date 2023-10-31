@@ -399,6 +399,8 @@ namespace Etiket
 
             System.Drawing.Printing.PrintDocument pd = new System.Drawing.Printing.PrintDocument();
             pd.PrinterSettings.PrinterName = Depo_Şablon.Oku("Yazıcı", null, 0);
+            pd.PrinterSettings.Copies = (short)Depo_Komut.Oku_TamSayı("Komut", 1, 1);
+            pd.PrintController = new System.Drawing.Printing.StandardPrintController(); //Yazdırılıyor yazısının gizlenmesi
             pd.OriginAtMargins = false;
             pd.PrintPage += pd_Yazdır;
             if (pd.PrinterSettings.IsValid) pd.Print();
