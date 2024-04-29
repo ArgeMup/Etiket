@@ -3,12 +3,6 @@ Genel amaçlı etiket üretme ve yazdırma uygulaması ArgeMup@yandex.com
 
     Tüm Ölçüler mm
 
-    Komut satırından kullanım
-        Seçenek 1 - Etiket.exe <Komut Verme Depo Dosyasının Yolu>
-        Seçenek 2 - Etiket.exe <Komut Verme Depo Dosyası İçeriğinin Base64 Hali>
-        Seçenek 3 - Etiket.exe YeniYazilimKontrolu                                      (Kontrolü bitirip kapanır)
-        Seçenek 4 - Etiket.exe                                                          (Bu durumda değişiklikleri kendi alt klasörüne kaydeder)
-
     Komut Verme Depo Dosyası İçeriği
         Komut / Ayarla VEYA
         Komut / Yazdır VEYA / Kopya Sayısı

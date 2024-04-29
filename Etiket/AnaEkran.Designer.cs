@@ -1251,7 +1251,6 @@
         private System.Windows.Forms.Label lbl9;
         private System.Windows.Forms.TextBox Görsel_Eleman_Adı;
         private System.Windows.Forms.CheckBox Görsel_Eleman_Yazı_Kalın;
-        private System.Windows.Forms.Button Kaydet;
         private System.Windows.Forms.CheckBox Görsel_Eleman_Renk_Arkaplan;
         private System.Windows.Forms.TextBox Hatalar;
         private System.Windows.Forms.Label label11;
@@ -1277,6 +1276,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Tablo_Değişkenler_İçeik;
         private System.Windows.Forms.SaveFileDialog DosyayaKaydetPaneli;
         private System.Windows.Forms.ContextMenuStrip SağTuşMenü_Değişkenler;
+        public System.Windows.Forms.Button Kaydet;
     }
 }
 

@@ -61,38 +61,26 @@
       <DependentUpon>AnaEkran.cs</DependentUpon>
     </Compile>
     <Compile Include="HazirKod_Cdiyez\ArkaPlan.cs" />
-    <Compile Include="HazirKod_Cdiyez\Ayarlar.cs" />
-    <Compile Include="HazirKod_Cdiyez\Ayarlar_Xml.cs" />
-    <Compile Include="HazirKod_Cdiyez\Degiskenler.cs" />
-    <Compile Include="HazirKod_Cdiyez\Deneysel.cs" />
     <Compile Include="HazirKod_Cdiyez\Depo.cs" />
+    <Compile Include="HazirKod_Cdiyez\Değişken.cs" />
     <Compile Include="HazirKod_Cdiyez\DonanımHaberleşmesi.cs" />
     <Compile Include="HazirKod_Cdiyez\DonanımHaberleşmesi_KomutSatırıUygulaması.cs" />
-    <Compile Include="HazirKod_Cdiyez\DonanımHaberleşmesi_SeriPort.cs" />
     <Compile Include="HazirKod_Cdiyez\DonanımHaberleşmesi_Tcp.cs" />
     <Compile Include="HazirKod_Cdiyez\DonanımHaberleşmesi_Udp.cs" />
     <Compile Include="HazirKod_Cdiyez\DoğrulamaKodu.cs" />
-    <Compile Include="HazirKod_Cdiyez\DurumBildirimi.cs" />
     <Compile Include="HazirKod_Cdiyez\Dönüştürme.cs" />
     <Compile Include="HazirKod_Cdiyez\Ekİşlemler.cs" />
     <Compile Include="HazirKod_Cdiyez\Günlük.cs" />
     <Compile Include="HazirKod_Cdiyez\Karmasiklastirma.cs" />
-    <Compile Include="HazirKod_Cdiyez\KayitDefteri.cs" />
-    <Compile Include="HazirKod_Cdiyez\KelimeTamamlayici.cs" />
     <Compile Include="HazirKod_Cdiyez\Kendi.cs" />
     <Compile Include="HazirKod_Cdiyez\KlasörDosya.cs" />
-    <Compile Include="HazirKod_Cdiyez\KlavyeFareGozlemcisi.cs" />
-    <Compile Include="HazirKod_Cdiyez\KodKümesi.cs" />
     <Compile Include="HazirKod_Cdiyez\Liste.cs" />
     <Compile Include="HazirKod_Cdiyez\Matematiksel.cs" />
-    <Compile Include="HazirKod_Cdiyez\MesajPanosu.cs" />
-    <Compile Include="HazirKod_Cdiyez\PencereVeTepsiIkonuKontrolu.cs" />
-    <Compile Include="HazirKod_Cdiyez\Sıkıştırma.cs" />
-    <Compile Include="HazirKod_Cdiyez\UygulamaBostaBekliyor.cs" />
-    <Compile Include="HazirKod_Cdiyez\UygulamalarArasiHaberlesme.cs" />
-    <Compile Include="HazirKod_Cdiyez\UygulamaOncedenCalistirildiMi.cs" />
     <Compile Include="HazirKod_Cdiyez\Win32Kutuphaneleri.cs" />
+    <Compile Include="HazirKod_Cdiyez\YanUygulama.cs" />
     <Compile Include="HazirKod_Cdiyez\YeniYazılımKontrolü.cs" />
+    <Compile Include="HazirKod_Cdiyez\Çalıştır.cs" />
+    <Compile Include="Ortak\AnaKontrolcü.cs" />
     <Compile Include="Ortak\Ortak.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -108,7 +96,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="HazirKod_Cdiyez\.git" />
     <None Include="HazirKod_Cdiyez\LICENSE" />
     <None Include="HazirKod_Cdiyez\README.md" />
     <None Include="Properties\Settings.settings">
@@ -129,4 +116,9 @@
     <Content Include="Etiket.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>echo ---
+"D:\Mesleki\Proje\Kendim\Cdiyez\DogrulamaKoduUreteci\Yayinla\DogrulamaKoduUreteci.exe" "$(TargetPath)"
+echo ---</PostBuildEvent>
+  </PropertyGroup>
 </Project>

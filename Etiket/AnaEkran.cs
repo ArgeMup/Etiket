@@ -19,7 +19,7 @@ namespace Etiket
         {
             InitializeComponent();
 
-            Text = "ArGeMuP " + Kendi.Adı + " " + Kendi.Sürümü_Dosya;
+            Text = "ArGeMuP " + Kendi.Adı;
 
             Ayraç_Üst_Alt.SplitterDistance = Ayraç_Üst_Alt.Height * 15 / 50;
             Detaylar_YazıResim.Panel2Collapsed = true;
@@ -51,6 +51,26 @@ namespace Etiket
             SağTuşMenü_Değişkenler_TuşlarıEkle();
             Görsel_Çizdir();
             Kaydet.Enabled = false;
+
+#if !DEBUG
+            if (!AnaKontrolcü.YanUygulamaOlarakÇalışıyor && !System.IO.File.Exists(Kendi.Klasörü + "\\YeniSurumuKontrolEtme.txt"))
+            {
+                Ortak.YeniYazılımKontrolü = new YeniYazılımKontrolü_();
+                Ortak.YeniYazılımKontrolü.Başlat(new Uri("https://github.com/ArgeMup/Etiket/raw/main/Etiket/bin/Release/Etiket.exe"), _YeniYazılımKontrolü_GeriBildirim_);
+
+                void _YeniYazılımKontrolü_GeriBildirim_(bool Sonuç, string Açıklama)
+                {
+                    if (Açıklama.Contains("github")) Açıklama = "Bağlantı kurulamadı";
+                    else if (Açıklama == "Durduruldu") return;
+
+                    Invoke(new Action(() =>
+                    {
+                        Text += " " + Açıklama;
+                    }));
+                }
+            }
+            else Text += " V" + Kendi.Sürümü_Dosya;
+#endif
         }
         private void AnaEkran_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -62,6 +82,8 @@ namespace Etiket
                     e.Cancel = true;
                 }
             }
+
+            if (!e.Cancel) Ortak.Görseller_DizisiniYoket();
         }
 
         #region Genel
@@ -250,7 +272,7 @@ namespace Etiket
 
             IDepo_Eleman yeni = Şablonlar[Şablon_Adı.Text];
             yeni.Yaz(null, true);
-            yeni.Ekle(null, Şablonlar[Şablon_Şablonlar.Text].YazıyaDönüştür(null, true));
+            yeni.Ekle(null, Şablonlar[Şablon_Şablonlar.Text].YazıyaDönüştür(null, true, false));
 
             Şablon_Şablonlar.Items.Add(Şablon_Adı.Text, true);
 

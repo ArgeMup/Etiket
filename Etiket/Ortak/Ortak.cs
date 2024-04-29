@@ -1,5 +1,6 @@
 ﻿using ArgeMup.HazirKod;
 using ArgeMup.HazirKod.Ekİşlemler;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 
@@ -7,6 +8,7 @@ namespace Etiket
 {
     public static class Ortak
     {
+        public static YeniYazılımKontrolü_ YeniYazılımKontrolü;
         public static Depo_ Depo_Komut = null, Depo_Ayarlar = null;
         public static IDepo_Eleman Depo_Şablon = null;
         public static Görsel[] Görsel_ler = null;
@@ -33,7 +35,7 @@ namespace Etiket
             return ArgeMup.HazirKod.Dönüştürme.D_HexYazı.BaytDizisinden(Girdi);
         }
 
-        public class Görsel
+        public class Görsel : IDisposable
         {
             #region Değişkenler
             //Genel
@@ -259,6 +261,9 @@ namespace Etiket
 
                     r.Inflate(0.2f, 0.2f);
                     Grafik.DrawRectangle(p_k, r.X, r.Y, r.Width, r.Height);
+
+                    p_k.Dispose();
+                    p_b.Dispose();
                 }
 
                 if (Açı != 0)
@@ -303,9 +308,45 @@ namespace Etiket
 
                 Detaylar.Yaz("Resim", Resim_Yuvarlama_Çap);
             }
+
+            #region Idisposable
+            private bool disposedValue;
+            protected virtual void Dispose(bool disposing)
+            {
+                if (!disposedValue)
+                {
+                    if (disposing)
+                    {
+                        // TODO: dispose managed state (managed objects)
+
+                        YenidenHesaplat();
+                    }
+
+                    // TODO: free unmanaged resources (unmanaged objects) and override finalizer
+                    // TODO: set large fields to null
+                    disposedValue = true;
+                }
+            }
+
+            // TODO: override finalizer only if 'Dispose(bool disposing)' has code to free unmanaged resources
+            ~Görsel()
+            {
+                // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+                Dispose(disposing: false);
+            }
+
+            public void Dispose()
+            {
+                // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+                Dispose(disposing: true);
+                GC.SuppressFinalize(this);
+            }
+            #endregion
         }
         public static void Görseller_DizisiniOluştur(IDepo_Eleman ŞablonDalı, bool BoşluklarıEkle)
         {
+            Görseller_DizisiniYoket();
+
             Depo_Şablon = ŞablonDalı;
 
             Görsel_ler = new Görsel[Depo_Şablon["Görseller"].Elemanları.Length];
@@ -317,6 +358,18 @@ namespace Etiket
                 if (BoşluklarıEkle) G.Çerçeve.Location = PointF.Add(G.Çerçeve.Location, Boşluk); //yazıcı ölü alanının eklenmesi
                 Görsel_ler[i] = G;
             }
+        }
+        public static void Görseller_DizisiniYoket()
+        {
+            if (Görsel_ler != null)
+            {
+                foreach (Görsel g in Görsel_ler)
+                {
+                    g.Dispose();
+                }
+            }
+
+            Görsel_ler = null;
         }
         public static void Görseller_YenidenHesaplat(Color İstenen_ArkaPlanRengi)
         {
