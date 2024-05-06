@@ -272,7 +272,7 @@ namespace Etiket
 
             IDepo_Eleman yeni = Şablonlar[Şablon_Adı.Text];
             yeni.Yaz(null, true);
-            yeni.Ekle(null, Şablonlar[Şablon_Şablonlar.Text].YazıyaDönüştür(null, true, false));
+            yeni.Ekle(null, Şablonlar[Şablon_Şablonlar.Text].YazıyaDönüştür(null, true, false), false);
 
             Şablon_Şablonlar.Items.Add(Şablon_Adı.Text, true);
 

@@ -29,7 +29,7 @@ namespace Etiket
 #if DEBUG
                 string komut = null;
                 string ayarlar = null;
-                ayarlar.Dosyaİçeriği_Yaz("Ayarlar.mup");
+                Dosya.Yaz("Ayarlar.mup", ayarlar);
 
                 //------------------------------------------
 
@@ -44,7 +44,7 @@ namespace Etiket
                 Ortak.Depo_Komut["Komut", 0] = "Ayarla";
                 Ortak.Depo_Komut["Ayarlar", 0] = Kendi.Klasörü + "\\Ayarlar.mup";
 
-                Ortak.Depo_Ayarlar = new Depo_(Ortak.Depo_Komut["Ayarlar", 0].DosyaYolu_Oku_Yazı());
+                Ortak.Depo_Ayarlar = new Depo_(Dosya.Oku_Yazı(Ortak.Depo_Komut["Ayarlar", 0]));
                 Değişkenler.Başlat();
 
                 BoştaBekleyenAnaUygulama = new AnaEkran();
@@ -81,7 +81,7 @@ namespace Etiket
 
                 if (YanUygulama_SonAçılan_Depo_Ayarlar_DosyaYolu != Ortak.Depo_Komut["Ayarlar", 0])
                 {
-                    Ortak.Depo_Ayarlar = new Depo_(Ortak.Depo_Komut["Ayarlar", 0].DosyaYolu_Oku_Yazı());
+                    Ortak.Depo_Ayarlar = new Depo_(Dosya.Oku_Yazı(Ortak.Depo_Komut["Ayarlar", 0]));
 
                     YanUygulama_SonAçılan_Depo_Ayarlar_DosyaYolu = Ortak.Depo_Komut["Ayarlar", 0];
                 }
