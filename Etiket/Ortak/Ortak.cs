@@ -545,7 +545,8 @@ namespace Etiket
                 Girdi = Girdi.Replace("%" + biri.Key + "%", biri.Value);
             }
 
-            return Girdi;
+            if (Girdi.Contains("%")) return "";
+            else return Girdi;
         }
     }
 }

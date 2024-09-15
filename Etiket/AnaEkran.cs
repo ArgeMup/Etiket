@@ -315,15 +315,16 @@ namespace Etiket
 
             Görsel_Çıktı_ArkaPlanRenk.FlatAppearance.CheckedBackColor = Ortak.ArkaPlanRengi;
             Görsel_Çıktı_ArkaPlanRenk.Checked = Ortak.ArkaPlanRengi != Color.Transparent;
-            Görsel_Çıktı_Genişlik.Value = (decimal)Ortak.KullanılabilirAlan_mm.Width;
-            Görsel_Çıktı_Yükseklik.Value = (decimal)Ortak.KullanılabilirAlan_mm.Height;
+            SizeF KullanılabilirAlan_mm = new SizeF(Ortak.KullanılabilirAlan_mm);
+            Görsel_Çıktı_Genişlik.Value = (decimal)KullanılabilirAlan_mm.Width;
+            Görsel_Çıktı_Yükseklik.Value = (decimal)KullanılabilirAlan_mm.Height;
 
             Yazıcı_Yazıcılar.SelectedIndex = -1;
             Yazıcı_Sol.Value = (decimal)Ortak.Depo_Şablon["Yazıcı"].Oku_Sayı(null, 5, 1);
             Yazıcı_Üst.Value = (decimal)Ortak.Depo_Şablon["Yazıcı"].Oku_Sayı(null, 5, 2);
 
             Görsel_Çıktı_BoyutlarıDeğişti(null, null);
-            Görsel_Çıktı_Yakınlaştırma.Value = 35;
+            Görsel_Çıktı_Yakınlaştırma.Value = 1;
             Görsel_Çıktı_Yakınlaştırma_Scroll(null, null);
 
             Görsel_Elemanlar.Items.Clear();
@@ -714,6 +715,37 @@ namespace Etiket
             Kaydet.Enabled = true;
             Ortak.Görseller_YenidenHesaplat(Ortak.YakınlaşmaOranı, (double)Görsel_Çıktı_Genişlik.Value, (double)Görsel_Çıktı_Yükseklik.Value);
 
+            if (Görsel_Çıktı_Genişlik.Value > Görsel_Çıktı_Yükseklik.Value)
+            {
+                if (P_ÇizimKonrolleri.Parent != Ayraç_Üst_Alt.Panel2)
+                {
+                    P_ÇizimKonrolleri.SuspendLayout();
+                    Ayraç_Sol_Sağ.Panel2Collapsed = true;
+
+                    P_ÇizimKonrolleri.Parent.Controls.Remove(P_ÇizimKonrolleri);
+                    Ayraç_Üst_Alt.Panel2.Controls.Add(P_ÇizimKonrolleri);
+                    Ayraç_Üst_Alt.Panel2Collapsed = false;
+
+                    P_ÇizimKonrolleri.ResumeLayout();
+                    P_ÇizimKonrolleri.PerformLayout();
+                }
+            }
+            else
+            {
+                if (P_ÇizimKonrolleri.Parent != Ayraç_Sol_Sağ.Panel2)
+                {
+                    P_ÇizimKonrolleri.SuspendLayout();
+                    Ayraç_Üst_Alt.Panel2Collapsed = true;
+
+                    P_ÇizimKonrolleri.Parent.Controls.Remove(P_ÇizimKonrolleri);
+                    Ayraç_Sol_Sağ.Panel2.Controls.Add(P_ÇizimKonrolleri);
+                    Ayraç_Sol_Sağ.Panel2Collapsed = false;
+
+                    P_ÇizimKonrolleri.ResumeLayout();
+                    P_ÇizimKonrolleri.PerformLayout();
+                }
+            }
+
             Görsel_Çizdir();
         }
         private void Görsel_Çıktı_ArkaPlanRenk_CheckedChanged(object sender, EventArgs e)
@@ -743,7 +775,19 @@ namespace Etiket
         }
         private void Görsel_Çıktı_Yakınlaştırma_Scroll(object sender, EventArgs e)
         {
-            Ortak.Görseller_YenidenHesaplat(Görsel_Çıktı_Yakınlaştırma.Value * 0.1f, Ortak.KullanılabilirAlan_mm.Width, Ortak.KullanılabilirAlan_mm.Height);
+            float istenen_yakımlaştırma;
+            if (Görsel_Çıktı_Yakınlaştırma.Value == 1)
+            {
+                istenen_yakımlaştırma = 1;
+                if (Görsel_Çıktı.Dock != DockStyle.Fill) Görsel_Çıktı.Dock = DockStyle.Fill;
+            }
+            else
+            {
+                istenen_yakımlaştırma = Görsel_Çıktı_Yakınlaştırma.Value * 0.1f;
+                if (Görsel_Çıktı.Dock != DockStyle.None) Görsel_Çıktı.Dock = DockStyle.None;
+            }
+
+            Ortak.Görseller_YenidenHesaplat(istenen_yakımlaştırma, Ortak.KullanılabilirAlan_mm.Width, Ortak.KullanılabilirAlan_mm.Height);
 
             Görsel_Çizdir();
         }

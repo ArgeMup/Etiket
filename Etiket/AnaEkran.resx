@@ -126,6 +126,9 @@
   <metadata name="SağTuşMenü_Değişkenler.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>393, 5</value>
   </metadata>
+  <metadata name="İpUcu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>143, 5</value>
+  </metadata>
   <data name="Görsel_Eleman_Resim_DosyaYolu.ToolTip" xml:space="preserve">
     <value>Genişlik 0 yapılarak resmin gerçek boyutu kullanılabilir.
 
@@ -142,6 +145,15 @@ eğer 0 yapılır ise kendi alanının içine sığdırılmak üzere büyüklü�
 Resim için çerçevenin kalınlığı anlamındadır ve
 eğer 0 yapılır ise çerçeve kapatılabilir.</value>
   </data>
+  <metadata name="Tablo_Değişkenler_Ekleyen.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Tablo_Değişkenler_Ad.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Tablo_Değişkenler_İçeik.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <metadata name="Tablo_Değişkenler_Ekleyen.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>

@@ -100,7 +100,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.Kaydet = new System.Windows.Forms.Button();
             this.Ayraç_Üst_Alt = new System.Windows.Forms.SplitContainer();
+            this.P_ÇizimKonrolleri = new System.Windows.Forms.Panel();
             this.DosyayaKaydetPaneli = new System.Windows.Forms.SaveFileDialog();
+            this.Ayraç_Sol_Sağ = new System.Windows.Forms.SplitContainer();
             ((System.ComponentModel.ISupportInitialize)(this.Görsel_Çıktı)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Görsel_Çıktı_Yakınlaştırma)).BeginInit();
             this.Görsel_Çıktı_Panel.SuspendLayout();
@@ -136,6 +138,10 @@
             this.Ayraç_Üst_Alt.Panel1.SuspendLayout();
             this.Ayraç_Üst_Alt.Panel2.SuspendLayout();
             this.Ayraç_Üst_Alt.SuspendLayout();
+            this.P_ÇizimKonrolleri.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Ayraç_Sol_Sağ)).BeginInit();
+            this.Ayraç_Sol_Sağ.Panel1.SuspendLayout();
+            this.Ayraç_Sol_Sağ.SuspendLayout();
             this.SuspendLayout();
             // 
             // Görsel_Elemanlar
@@ -144,7 +150,7 @@
             this.Görsel_Elemanlar.FormattingEnabled = true;
             this.Görsel_Elemanlar.Location = new System.Drawing.Point(0, 0);
             this.Görsel_Elemanlar.Name = "Görsel_Elemanlar";
-            this.Görsel_Elemanlar.Size = new System.Drawing.Size(246, 182);
+            this.Görsel_Elemanlar.Size = new System.Drawing.Size(246, 179);
             this.Görsel_Elemanlar.TabIndex = 2;
             this.İpUcu.SetToolTip(this.Görsel_Elemanlar, "Listedeki üstteki görsel alttakinin üzerine çizilir.");
             this.Görsel_Elemanlar.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.Görsel_Elemanlar_ItemCheck);
@@ -173,15 +179,15 @@
             this.Görsel_Çıktı_Yakınlaştırma.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Görsel_Çıktı_Yakınlaştırma.LargeChange = 10;
-            this.Görsel_Çıktı_Yakınlaştırma.Location = new System.Drawing.Point(3, 64);
+            this.Görsel_Çıktı_Yakınlaştırma.Location = new System.Drawing.Point(0, 25);
             this.Görsel_Çıktı_Yakınlaştırma.Maximum = 100;
-            this.Görsel_Çıktı_Yakınlaştırma.Minimum = 10;
+            this.Görsel_Çıktı_Yakınlaştırma.Minimum = 1;
             this.Görsel_Çıktı_Yakınlaştırma.Name = "Görsel_Çıktı_Yakınlaştırma";
-            this.Görsel_Çıktı_Yakınlaştırma.Size = new System.Drawing.Size(881, 45);
+            this.Görsel_Çıktı_Yakınlaştırma.Size = new System.Drawing.Size(879, 56);
             this.Görsel_Çıktı_Yakınlaştırma.TabIndex = 8;
             this.Görsel_Çıktı_Yakınlaştırma.TickFrequency = 10;
             this.Görsel_Çıktı_Yakınlaştırma.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
-            this.Görsel_Çıktı_Yakınlaştırma.Value = 10;
+            this.Görsel_Çıktı_Yakınlaştırma.Value = 1;
             this.Görsel_Çıktı_Yakınlaştırma.Scroll += new System.EventHandler(this.Görsel_Çıktı_Yakınlaştırma_Scroll);
             // 
             // Görsel_Çıktı_Panel
@@ -192,9 +198,9 @@
             this.Görsel_Çıktı_Panel.AutoScroll = true;
             this.Görsel_Çıktı_Panel.BackColor = System.Drawing.SystemColors.Control;
             this.Görsel_Çıktı_Panel.Controls.Add(this.Görsel_Çıktı);
-            this.Görsel_Çıktı_Panel.Location = new System.Drawing.Point(-2, 3);
+            this.Görsel_Çıktı_Panel.Location = new System.Drawing.Point(0, 0);
             this.Görsel_Çıktı_Panel.Name = "Görsel_Çıktı_Panel";
-            this.Görsel_Çıktı_Panel.Size = new System.Drawing.Size(886, 61);
+            this.Görsel_Çıktı_Panel.Size = new System.Drawing.Size(879, 37);
             this.Görsel_Çıktı_Panel.TabIndex = 10;
             this.İpUcu.SetToolTip(this.Görsel_Çıktı_Panel, "Sol tuş : Seçili görseli temizler\r\nSağ tuş : Resmi dosyaya kaydeder");
             this.Görsel_Çıktı_Panel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Görsel_Çıktı_Panel_MouseDown);
@@ -206,9 +212,9 @@
             this.Görsel_Çıktı_Sürüklenebilir.AutoSize = true;
             this.Görsel_Çıktı_Sürüklenebilir.FlatAppearance.CheckedBackColor = System.Drawing.Color.GreenYellow;
             this.Görsel_Çıktı_Sürüklenebilir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Görsel_Çıktı_Sürüklenebilir.Location = new System.Drawing.Point(492, 51);
+            this.Görsel_Çıktı_Sürüklenebilir.Location = new System.Drawing.Point(461, 55);
             this.Görsel_Çıktı_Sürüklenebilir.Name = "Görsel_Çıktı_Sürüklenebilir";
-            this.Görsel_Çıktı_Sürüklenebilir.Size = new System.Drawing.Size(80, 23);
+            this.Görsel_Çıktı_Sürüklenebilir.Size = new System.Drawing.Size(98, 26);
             this.Görsel_Çıktı_Sürüklenebilir.TabIndex = 7;
             this.Görsel_Çıktı_Sürüklenebilir.Text = "Sürüklenebilir";
             this.Görsel_Çıktı_Sürüklenebilir.UseVisualStyleBackColor = true;
@@ -237,7 +243,7 @@
             this.Detaylar_YazıResim.Panel2.Controls.Add(this.Görsel_Eleman_Resim_ÇemberÇap);
             this.Detaylar_YazıResim.Panel2.Controls.Add(this.Görsel_Eleman_Resim_DosyaYolu);
             this.Detaylar_YazıResim.Panel2.Controls.Add(this.label10);
-            this.Detaylar_YazıResim.Size = new System.Drawing.Size(606, 101);
+            this.Detaylar_YazıResim.Size = new System.Drawing.Size(606, 98);
             this.Detaylar_YazıResim.SplitterDistance = 439;
             this.Detaylar_YazıResim.TabIndex = 11;
             // 
@@ -249,7 +255,7 @@
             this.Görsel_Eleman_Yazı_Kalın.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Görsel_Eleman_Yazı_Kalın.Location = new System.Drawing.Point(54, 30);
             this.Görsel_Eleman_Yazı_Kalın.Name = "Görsel_Eleman_Yazı_Kalın";
-            this.Görsel_Eleman_Yazı_Kalın.Size = new System.Drawing.Size(115, 23);
+            this.Görsel_Eleman_Yazı_Kalın.Size = new System.Drawing.Size(138, 26);
             this.Görsel_Eleman_Yazı_Kalın.TabIndex = 24;
             this.Görsel_Eleman_Yazı_Kalın.Text = "Kalın Karakter Kullan";
             this.Görsel_Eleman_Yazı_Kalın.UseVisualStyleBackColor = true;
@@ -265,7 +271,7 @@
             "Altta"});
             this.Görsel_Eleman_Yazı_Yaslama_Dikey.Location = new System.Drawing.Point(277, 32);
             this.Görsel_Eleman_Yazı_Yaslama_Dikey.Name = "Görsel_Eleman_Yazı_Yaslama_Dikey";
-            this.Görsel_Eleman_Yazı_Yaslama_Dikey.Size = new System.Drawing.Size(96, 21);
+            this.Görsel_Eleman_Yazı_Yaslama_Dikey.Size = new System.Drawing.Size(96, 24);
             this.Görsel_Eleman_Yazı_Yaslama_Dikey.TabIndex = 23;
             this.Görsel_Eleman_Yazı_Yaslama_Dikey.SelectedIndexChanged += new System.EventHandler(this.Görsel_Ayar_Değişti);
             // 
@@ -274,7 +280,7 @@
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(7, 63);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(33, 13);
+            this.label7.Size = new System.Drawing.Size(39, 16);
             this.label7.TabIndex = 20;
             this.label7.Text = "İçerik";
             // 
@@ -288,7 +294,7 @@
             "Sağda"});
             this.Görsel_Eleman_Yazı_Yaslama_Yatay.Location = new System.Drawing.Point(175, 32);
             this.Görsel_Eleman_Yazı_Yaslama_Yatay.Name = "Görsel_Eleman_Yazı_Yaslama_Yatay";
-            this.Görsel_Eleman_Yazı_Yaslama_Yatay.Size = new System.Drawing.Size(96, 21);
+            this.Görsel_Eleman_Yazı_Yaslama_Yatay.Size = new System.Drawing.Size(96, 24);
             this.Görsel_Eleman_Yazı_Yaslama_Yatay.TabIndex = 23;
             this.Görsel_Eleman_Yazı_Yaslama_Yatay.SelectedIndexChanged += new System.EventHandler(this.Görsel_Ayar_Değişti);
             // 
@@ -297,7 +303,7 @@
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(7, 6);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(22, 13);
+            this.label8.Size = new System.Drawing.Size(27, 16);
             this.label8.TabIndex = 22;
             this.label8.Text = "Tip";
             // 
@@ -311,12 +317,13 @@
             this.Görsel_Eleman_Yazı_İçerik.Multiline = true;
             this.Görsel_Eleman_Yazı_İçerik.Name = "Görsel_Eleman_Yazı_İçerik";
             this.Görsel_Eleman_Yazı_İçerik.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.Görsel_Eleman_Yazı_İçerik.Size = new System.Drawing.Size(377, 39);
+            this.Görsel_Eleman_Yazı_İçerik.Size = new System.Drawing.Size(377, 36);
             this.Görsel_Eleman_Yazı_İçerik.TabIndex = 20;
             this.Görsel_Eleman_Yazı_İçerik.TextChanged += new System.EventHandler(this.Görsel_Ayar_Değişti);
             // 
             // SağTuşMenü_Değişkenler
             // 
+            this.SağTuşMenü_Değişkenler.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.SağTuşMenü_Değişkenler.Name = "SağTuşMenü_Değişkenler";
             this.SağTuşMenü_Değişkenler.ShowImageMargin = false;
             this.SağTuşMenü_Değişkenler.Size = new System.Drawing.Size(36, 4);
@@ -328,7 +335,7 @@
             this.Görsel_Eleman_Yazı_KarakterKümesi.FormattingEnabled = true;
             this.Görsel_Eleman_Yazı_KarakterKümesi.Location = new System.Drawing.Point(54, 3);
             this.Görsel_Eleman_Yazı_KarakterKümesi.Name = "Görsel_Eleman_Yazı_KarakterKümesi";
-            this.Görsel_Eleman_Yazı_KarakterKümesi.Size = new System.Drawing.Size(319, 21);
+            this.Görsel_Eleman_Yazı_KarakterKümesi.Size = new System.Drawing.Size(319, 24);
             this.Görsel_Eleman_Yazı_KarakterKümesi.TabIndex = 21;
             this.Görsel_Eleman_Yazı_KarakterKümesi.SelectedIndexChanged += new System.EventHandler(this.Görsel_Ayar_Değişti);
             // 
@@ -337,7 +344,7 @@
             this.label14.AutoSize = true;
             this.label14.Location = new System.Drawing.Point(7, 35);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(67, 13);
+            this.label14.Size = new System.Drawing.Size(86, 16);
             this.label14.TabIndex = 28;
             this.label14.Text = "Çember Çapı";
             // 
@@ -356,7 +363,7 @@
             0,
             0});
             this.Görsel_Eleman_Resim_ÇemberÇap.Name = "Görsel_Eleman_Resim_ÇemberÇap";
-            this.Görsel_Eleman_Resim_ÇemberÇap.Size = new System.Drawing.Size(96, 20);
+            this.Görsel_Eleman_Resim_ÇemberÇap.Size = new System.Drawing.Size(96, 22);
             this.Görsel_Eleman_Resim_ÇemberÇap.TabIndex = 24;
             this.Görsel_Eleman_Resim_ÇemberÇap.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.Görsel_Eleman_Resim_ÇemberÇap.Value = new decimal(new int[] {
@@ -373,7 +380,7 @@
             this.Görsel_Eleman_Resim_DosyaYolu.ContextMenuStrip = this.SağTuşMenü_Değişkenler;
             this.Görsel_Eleman_Resim_DosyaYolu.Location = new System.Drawing.Point(80, 3);
             this.Görsel_Eleman_Resim_DosyaYolu.Name = "Görsel_Eleman_Resim_DosyaYolu";
-            this.Görsel_Eleman_Resim_DosyaYolu.Size = new System.Drawing.Size(70, 20);
+            this.Görsel_Eleman_Resim_DosyaYolu.Size = new System.Drawing.Size(70, 22);
             this.Görsel_Eleman_Resim_DosyaYolu.TabIndex = 21;
             this.İpUcu.SetToolTip(this.Görsel_Eleman_Resim_DosyaYolu, resources.GetString("Görsel_Eleman_Resim_DosyaYolu.ToolTip"));
             this.Görsel_Eleman_Resim_DosyaYolu.TextChanged += new System.EventHandler(this.Görsel_Ayar_Değişti);
@@ -383,7 +390,7 @@
             this.label10.AutoSize = true;
             this.label10.Location = new System.Drawing.Point(7, 6);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(61, 13);
+            this.label10.Size = new System.Drawing.Size(77, 16);
             this.label10.TabIndex = 22;
             this.label10.Text = "Dosya Yolu";
             // 
@@ -402,7 +409,7 @@
             0,
             0});
             this.Görsel_Eleman_EtKalınlığı.Name = "Görsel_Eleman_EtKalınlığı";
-            this.Görsel_Eleman_EtKalınlığı.Size = new System.Drawing.Size(171, 20);
+            this.Görsel_Eleman_EtKalınlığı.Size = new System.Drawing.Size(171, 22);
             this.Görsel_Eleman_EtKalınlığı.TabIndex = 15;
             this.Görsel_Eleman_EtKalınlığı.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.İpUcu.SetToolTip(this.Görsel_Eleman_EtKalınlığı, resources.GetString("Görsel_Eleman_EtKalınlığı.ToolTip"));
@@ -413,7 +420,7 @@
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(10, 59);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(40, 13);
+            this.label9.Size = new System.Drawing.Size(49, 16);
             this.label9.TabIndex = 14;
             this.label9.Text = "Kalınlık";
             // 
@@ -425,7 +432,7 @@
             this.Görsel_Eleman_Renk_Arkaplan.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Görsel_Eleman_Renk_Arkaplan.Location = new System.Drawing.Point(428, 54);
             this.Görsel_Eleman_Renk_Arkaplan.Name = "Görsel_Eleman_Renk_Arkaplan";
-            this.Görsel_Eleman_Renk_Arkaplan.Size = new System.Drawing.Size(90, 23);
+            this.Görsel_Eleman_Renk_Arkaplan.Size = new System.Drawing.Size(110, 26);
             this.Görsel_Eleman_Renk_Arkaplan.TabIndex = 26;
             this.Görsel_Eleman_Renk_Arkaplan.Text = "Arkaplan Rengi";
             this.İpUcu.SetToolTip(this.Görsel_Eleman_Renk_Arkaplan, "Yazının arkaplanının rengi");
@@ -462,7 +469,7 @@
             0,
             -2147483648});
             this.Görsel_Eleman_Açı.Name = "Görsel_Eleman_Açı";
-            this.Görsel_Eleman_Açı.Size = new System.Drawing.Size(171, 20);
+            this.Görsel_Eleman_Açı.Size = new System.Drawing.Size(171, 22);
             this.Görsel_Eleman_Açı.TabIndex = 2;
             this.Görsel_Eleman_Açı.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.Görsel_Eleman_Açı.ValueChanged += new System.EventHandler(this.Görsel_Ayar_Değişti);
@@ -482,7 +489,7 @@
             0,
             0});
             this.Görsel_Eleman_Genişlik.Name = "Görsel_Eleman_Genişlik";
-            this.Görsel_Eleman_Genişlik.Size = new System.Drawing.Size(96, 20);
+            this.Görsel_Eleman_Genişlik.Size = new System.Drawing.Size(96, 22);
             this.Görsel_Eleman_Genişlik.TabIndex = 13;
             this.Görsel_Eleman_Genişlik.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.Görsel_Eleman_Genişlik.ValueChanged += new System.EventHandler(this.Görsel_Ayar_Değişti);
@@ -492,7 +499,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(10, 33);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(22, 13);
+            this.label2.Size = new System.Drawing.Size(26, 16);
             this.label2.TabIndex = 4;
             this.label2.Text = "Açı";
             // 
@@ -516,7 +523,7 @@
             0,
             -2147483648});
             this.Görsel_Eleman_Sol.Name = "Görsel_Eleman_Sol";
-            this.Görsel_Eleman_Sol.Size = new System.Drawing.Size(96, 20);
+            this.Görsel_Eleman_Sol.Size = new System.Drawing.Size(96, 22);
             this.Görsel_Eleman_Sol.TabIndex = 19;
             this.Görsel_Eleman_Sol.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.Görsel_Eleman_Sol.ValueChanged += new System.EventHandler(this.Görsel_Ayar_Değişti);
@@ -526,7 +533,7 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(369, 33);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(53, 13);
+            this.label5.Size = new System.Drawing.Size(65, 16);
             this.label5.TabIndex = 16;
             this.label5.Text = "Yükseklik";
             // 
@@ -550,7 +557,7 @@
             0,
             -2147483648});
             this.Görsel_Eleman_Üst.Name = "Görsel_Eleman_Üst";
-            this.Görsel_Eleman_Üst.Size = new System.Drawing.Size(96, 20);
+            this.Görsel_Eleman_Üst.Size = new System.Drawing.Size(96, 22);
             this.Görsel_Eleman_Üst.TabIndex = 15;
             this.Görsel_Eleman_Üst.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.Görsel_Eleman_Üst.Value = new decimal(new int[] {
@@ -565,7 +572,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(234, 33);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(23, 13);
+            this.label3.Size = new System.Drawing.Size(27, 16);
             this.label3.TabIndex = 4;
             this.label3.Text = "Üst";
             // 
@@ -584,7 +591,7 @@
             0,
             0});
             this.Görsel_Eleman_Yükseklik.Name = "Görsel_Eleman_Yükseklik";
-            this.Görsel_Eleman_Yükseklik.Size = new System.Drawing.Size(96, 20);
+            this.Görsel_Eleman_Yükseklik.Size = new System.Drawing.Size(96, 22);
             this.Görsel_Eleman_Yükseklik.TabIndex = 17;
             this.Görsel_Eleman_Yükseklik.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.Görsel_Eleman_Yükseklik.Value = new decimal(new int[] {
@@ -599,7 +606,7 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(234, 6);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(22, 13);
+            this.label6.Size = new System.Drawing.Size(27, 16);
             this.label6.TabIndex = 18;
             this.label6.Text = "Sol";
             // 
@@ -608,7 +615,7 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(369, 6);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(44, 13);
+            this.label4.Size = new System.Drawing.Size(55, 16);
             this.label4.TabIndex = 14;
             this.label4.Text = "Genişlik";
             // 
@@ -648,14 +655,14 @@
             this.Görsel_Kat1_Elemanlar_Detaylar.Panel2.Controls.Add(this.Görsel_Eleman_Açı);
             this.Görsel_Kat1_Elemanlar_Detaylar.Panel2.Controls.Add(this.Görsel_Eleman_Yükseklik);
             this.Görsel_Kat1_Elemanlar_Detaylar.Panel2.Controls.Add(this.Görsel_Eleman_Üst);
-            this.Görsel_Kat1_Elemanlar_Detaylar.Size = new System.Drawing.Size(868, 186);
+            this.Görsel_Kat1_Elemanlar_Detaylar.Size = new System.Drawing.Size(868, 183);
             this.Görsel_Kat1_Elemanlar_Detaylar.SplitterDistance = 250;
             this.Görsel_Kat1_Elemanlar_Detaylar.TabIndex = 23;
             // 
             // Görsel_Eleman_Yukarı
             // 
             this.Görsel_Eleman_Yukarı.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.Görsel_Eleman_Yukarı.Location = new System.Drawing.Point(214, 67);
+            this.Görsel_Eleman_Yukarı.Location = new System.Drawing.Point(214, 64);
             this.Görsel_Eleman_Yukarı.Name = "Görsel_Eleman_Yukarı";
             this.Görsel_Eleman_Yukarı.Size = new System.Drawing.Size(26, 23);
             this.Görsel_Eleman_Yukarı.TabIndex = 8;
@@ -667,7 +674,7 @@
             // Görsel_Eleman_Sil
             // 
             this.Görsel_Eleman_Sil.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.Görsel_Eleman_Sil.Location = new System.Drawing.Point(214, 127);
+            this.Görsel_Eleman_Sil.Location = new System.Drawing.Point(214, 124);
             this.Görsel_Eleman_Sil.Name = "Görsel_Eleman_Sil";
             this.Görsel_Eleman_Sil.Size = new System.Drawing.Size(26, 23);
             this.Görsel_Eleman_Sil.TabIndex = 21;
@@ -679,7 +686,7 @@
             // Görsel_Eleman_Aşağı
             // 
             this.Görsel_Eleman_Aşağı.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.Görsel_Eleman_Aşağı.Location = new System.Drawing.Point(214, 98);
+            this.Görsel_Eleman_Aşağı.Location = new System.Drawing.Point(214, 95);
             this.Görsel_Eleman_Aşağı.Name = "Görsel_Eleman_Aşağı";
             this.Görsel_Eleman_Aşağı.Size = new System.Drawing.Size(26, 23);
             this.Görsel_Eleman_Aşağı.TabIndex = 8;
@@ -691,7 +698,7 @@
             // Görsel_Eleman_Resim
             // 
             this.Görsel_Eleman_Resim.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.Görsel_Eleman_Resim.Location = new System.Drawing.Point(182, 156);
+            this.Görsel_Eleman_Resim.Location = new System.Drawing.Point(182, 153);
             this.Görsel_Eleman_Resim.Name = "Görsel_Eleman_Resim";
             this.Görsel_Eleman_Resim.Size = new System.Drawing.Size(26, 23);
             this.Görsel_Eleman_Resim.TabIndex = 22;
@@ -703,7 +710,7 @@
             // Görsel_Eleman_Yazı
             // 
             this.Görsel_Eleman_Yazı.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.Görsel_Eleman_Yazı.Location = new System.Drawing.Point(214, 156);
+            this.Görsel_Eleman_Yazı.Location = new System.Drawing.Point(214, 153);
             this.Görsel_Eleman_Yazı.Name = "Görsel_Eleman_Yazı";
             this.Görsel_Eleman_Yazı.Size = new System.Drawing.Size(26, 23);
             this.Görsel_Eleman_Yazı.TabIndex = 22;
@@ -727,7 +734,7 @@
             // 
             this.Görsel_Eleman_Adı.Location = new System.Drawing.Point(57, 3);
             this.Görsel_Eleman_Adı.Name = "Görsel_Eleman_Adı";
-            this.Görsel_Eleman_Adı.Size = new System.Drawing.Size(171, 20);
+            this.Görsel_Eleman_Adı.Size = new System.Drawing.Size(171, 22);
             this.Görsel_Eleman_Adı.TabIndex = 25;
             this.Görsel_Eleman_Adı.TextChanged += new System.EventHandler(this.Görsel_Ayar_Değişti);
             // 
@@ -736,7 +743,7 @@
             this.lbl9.AutoSize = true;
             this.lbl9.Location = new System.Drawing.Point(10, 6);
             this.lbl9.Name = "lbl9";
-            this.lbl9.Size = new System.Drawing.Size(20, 13);
+            this.lbl9.Size = new System.Drawing.Size(24, 16);
             this.lbl9.TabIndex = 24;
             this.lbl9.Text = "Ad";
             // 
@@ -749,9 +756,9 @@
             this.Görsel_Çıktı_ArkaPlanRenk.CheckState = System.Windows.Forms.CheckState.Checked;
             this.Görsel_Çıktı_ArkaPlanRenk.FlatAppearance.CheckedBackColor = System.Drawing.Color.GreenYellow;
             this.Görsel_Çıktı_ArkaPlanRenk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Görsel_Çıktı_ArkaPlanRenk.Location = new System.Drawing.Point(782, 51);
+            this.Görsel_Çıktı_ArkaPlanRenk.Location = new System.Drawing.Point(769, 55);
             this.Görsel_Çıktı_ArkaPlanRenk.Name = "Görsel_Çıktı_ArkaPlanRenk";
-            this.Görsel_Çıktı_ArkaPlanRenk.Size = new System.Drawing.Size(90, 23);
+            this.Görsel_Çıktı_ArkaPlanRenk.Size = new System.Drawing.Size(110, 26);
             this.Görsel_Çıktı_ArkaPlanRenk.TabIndex = 27;
             this.Görsel_Çıktı_ArkaPlanRenk.Text = "Arkaplan Rengi";
             this.İpUcu.SetToolTip(this.Görsel_Çıktı_ArkaPlanRenk, "Yazının arkaplanının rengi");
@@ -762,7 +769,7 @@
             // 
             this.Görsel_Çıktı_Yükseklik.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Görsel_Çıktı_Yükseklik.DecimalPlaces = 2;
-            this.Görsel_Çıktı_Yükseklik.Location = new System.Drawing.Point(680, 54);
+            this.Görsel_Çıktı_Yükseklik.Location = new System.Drawing.Point(667, 58);
             this.Görsel_Çıktı_Yükseklik.Maximum = new decimal(new int[] {
             9999,
             0,
@@ -774,7 +781,7 @@
             0,
             0});
             this.Görsel_Çıktı_Yükseklik.Name = "Görsel_Çıktı_Yükseklik";
-            this.Görsel_Çıktı_Yükseklik.Size = new System.Drawing.Size(96, 20);
+            this.Görsel_Çıktı_Yükseklik.Size = new System.Drawing.Size(96, 22);
             this.Görsel_Çıktı_Yükseklik.TabIndex = 23;
             this.Görsel_Çıktı_Yükseklik.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.İpUcu.SetToolTip(this.Görsel_Çıktı_Yükseklik, "Yükseklik (mm)");
@@ -789,7 +796,7 @@
             // 
             this.Görsel_Çıktı_Genişlik.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Görsel_Çıktı_Genişlik.DecimalPlaces = 2;
-            this.Görsel_Çıktı_Genişlik.Location = new System.Drawing.Point(578, 54);
+            this.Görsel_Çıktı_Genişlik.Location = new System.Drawing.Point(565, 58);
             this.Görsel_Çıktı_Genişlik.Maximum = new decimal(new int[] {
             9999,
             0,
@@ -801,7 +808,7 @@
             0,
             0});
             this.Görsel_Çıktı_Genişlik.Name = "Görsel_Çıktı_Genişlik";
-            this.Görsel_Çıktı_Genişlik.Size = new System.Drawing.Size(96, 20);
+            this.Görsel_Çıktı_Genişlik.Size = new System.Drawing.Size(96, 22);
             this.Görsel_Çıktı_Genişlik.TabIndex = 20;
             this.Görsel_Çıktı_Genişlik.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.İpUcu.SetToolTip(this.Görsel_Çıktı_Genişlik, "Genişlik (mm)");
@@ -826,7 +833,7 @@
             // 
             this.Şablon_Sil.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Şablon_Sil.BackColor = System.Drawing.Color.Salmon;
-            this.Şablon_Sil.Location = new System.Drawing.Point(178, 70);
+            this.Şablon_Sil.Location = new System.Drawing.Point(178, 67);
             this.Şablon_Sil.Name = "Şablon_Sil";
             this.Şablon_Sil.Size = new System.Drawing.Size(61, 31);
             this.Şablon_Sil.TabIndex = 24;
@@ -839,7 +846,7 @@
             // 
             this.Şablon_Ekle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Şablon_Ekle.BackColor = System.Drawing.Color.YellowGreen;
-            this.Şablon_Ekle.Location = new System.Drawing.Point(178, 144);
+            this.Şablon_Ekle.Location = new System.Drawing.Point(178, 141);
             this.Şablon_Ekle.Name = "Şablon_Ekle";
             this.Şablon_Ekle.Size = new System.Drawing.Size(61, 31);
             this.Şablon_Ekle.TabIndex = 25;
@@ -854,7 +861,7 @@
             this.Şablon_Şablonlar.FormattingEnabled = true;
             this.Şablon_Şablonlar.Location = new System.Drawing.Point(0, 0);
             this.Şablon_Şablonlar.Name = "Şablon_Şablonlar";
-            this.Şablon_Şablonlar.Size = new System.Drawing.Size(246, 182);
+            this.Şablon_Şablonlar.Size = new System.Drawing.Size(246, 179);
             this.Şablon_Şablonlar.TabIndex = 23;
             this.İpUcu.SetToolTip(this.Şablon_Şablonlar, "Listedeki üstteki görsel alttakinin üzerine çizilir.");
             this.Şablon_Şablonlar.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.Şablon_Şablonlar_ItemCheck);
@@ -864,9 +871,9 @@
             // 
             this.Şablon_Adı.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Şablon_Adı.BackColor = System.Drawing.SystemColors.Menu;
-            this.Şablon_Adı.Location = new System.Drawing.Point(1, 151);
+            this.Şablon_Adı.Location = new System.Drawing.Point(1, 148);
             this.Şablon_Adı.Name = "Şablon_Adı";
-            this.Şablon_Adı.Size = new System.Drawing.Size(171, 20);
+            this.Şablon_Adı.Size = new System.Drawing.Size(171, 22);
             this.Şablon_Adı.TabIndex = 27;
             this.İpUcu.SetToolTip(this.Şablon_Adı, "Yeni Şablonun Adı");
             // 
@@ -874,7 +881,7 @@
             // 
             this.Şablon_Kopyala.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Şablon_Kopyala.BackColor = System.Drawing.Color.LightBlue;
-            this.Şablon_Kopyala.Location = new System.Drawing.Point(178, 107);
+            this.Şablon_Kopyala.Location = new System.Drawing.Point(178, 104);
             this.Şablon_Kopyala.Name = "Şablon_Kopyala";
             this.Şablon_Kopyala.Size = new System.Drawing.Size(61, 31);
             this.Şablon_Kopyala.TabIndex = 28;
@@ -895,8 +902,9 @@
             this.Tablo_Değişkenler.MultiSelect = false;
             this.Tablo_Değişkenler.Name = "Tablo_Değişkenler";
             this.Tablo_Değişkenler.RowHeadersVisible = false;
+            this.Tablo_Değişkenler.RowHeadersWidth = 51;
             this.Tablo_Değişkenler.ShowCellToolTips = false;
-            this.Tablo_Değişkenler.Size = new System.Drawing.Size(610, 182);
+            this.Tablo_Değişkenler.Size = new System.Drawing.Size(610, 179);
             this.Tablo_Değişkenler.TabIndex = 0;
             this.İpUcu.SetToolTip(this.Tablo_Değişkenler, "Kendi eklediğiniz değişkeni silmek için ADI sutunu içeriğini silebilirsiniz.");
             this.Tablo_Değişkenler.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.Tablo_Değişkenler_CellValueChanged);
@@ -905,22 +913,25 @@
             // 
             this.Tablo_Değişkenler_Ekleyen.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.Tablo_Değişkenler_Ekleyen.HeaderText = "Ekleyen";
+            this.Tablo_Değişkenler_Ekleyen.MinimumWidth = 6;
             this.Tablo_Değişkenler_Ekleyen.Name = "Tablo_Değişkenler_Ekleyen";
             this.Tablo_Değişkenler_Ekleyen.ReadOnly = true;
             this.Tablo_Değişkenler_Ekleyen.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Tablo_Değişkenler_Ekleyen.Width = 70;
+            this.Tablo_Değişkenler_Ekleyen.Width = 85;
             // 
             // Tablo_Değişkenler_Ad
             // 
             this.Tablo_Değişkenler_Ad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.Tablo_Değişkenler_Ad.HeaderText = "Adı";
+            this.Tablo_Değişkenler_Ad.MinimumWidth = 6;
             this.Tablo_Değişkenler_Ad.Name = "Tablo_Değişkenler_Ad";
-            this.Tablo_Değişkenler_Ad.Width = 47;
+            this.Tablo_Değişkenler_Ad.Width = 56;
             // 
             // Tablo_Değişkenler_İçeik
             // 
             this.Tablo_Değişkenler_İçeik.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Tablo_Değişkenler_İçeik.HeaderText = "Değişkenin İçeriği";
+            this.Tablo_Değişkenler_İçeik.MinimumWidth = 6;
             this.Tablo_Değişkenler_İçeik.Name = "Tablo_Değişkenler_İçeik";
             // 
             // Sayfalar
@@ -940,10 +951,10 @@
             // 
             this.Sayfa_Şablon.BackColor = System.Drawing.SystemColors.Control;
             this.Sayfa_Şablon.Controls.Add(this.splitContainer1);
-            this.Sayfa_Şablon.Location = new System.Drawing.Point(4, 22);
+            this.Sayfa_Şablon.Location = new System.Drawing.Point(4, 25);
             this.Sayfa_Şablon.Name = "Sayfa_Şablon";
             this.Sayfa_Şablon.Padding = new System.Windows.Forms.Padding(3);
-            this.Sayfa_Şablon.Size = new System.Drawing.Size(874, 192);
+            this.Sayfa_Şablon.Size = new System.Drawing.Size(874, 189);
             this.Sayfa_Şablon.TabIndex = 2;
             this.Sayfa_Şablon.Text = "Şablon";
             // 
@@ -965,7 +976,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.Tablo_Değişkenler);
-            this.splitContainer1.Size = new System.Drawing.Size(868, 186);
+            this.splitContainer1.Size = new System.Drawing.Size(868, 183);
             this.splitContainer1.SplitterDistance = 250;
             this.splitContainer1.TabIndex = 29;
             // 
@@ -973,10 +984,10 @@
             // 
             this.Sayfa_Görsel.BackColor = System.Drawing.SystemColors.Control;
             this.Sayfa_Görsel.Controls.Add(this.Görsel_Kat1_Elemanlar_Detaylar);
-            this.Sayfa_Görsel.Location = new System.Drawing.Point(4, 22);
+            this.Sayfa_Görsel.Location = new System.Drawing.Point(4, 25);
             this.Sayfa_Görsel.Name = "Sayfa_Görsel";
             this.Sayfa_Görsel.Padding = new System.Windows.Forms.Padding(3);
-            this.Sayfa_Görsel.Size = new System.Drawing.Size(874, 192);
+            this.Sayfa_Görsel.Size = new System.Drawing.Size(874, 189);
             this.Sayfa_Görsel.TabIndex = 0;
             this.Sayfa_Görsel.Text = "Görsel";
             // 
@@ -991,16 +1002,16 @@
             this.Sayfa_Yazıcı.Controls.Add(this.Yazıcı_Yazıcılar);
             this.Sayfa_Yazıcı.Controls.Add(this.Yazıcı_Açıklama);
             this.Sayfa_Yazıcı.Controls.Add(this.label1);
-            this.Sayfa_Yazıcı.Location = new System.Drawing.Point(4, 22);
+            this.Sayfa_Yazıcı.Location = new System.Drawing.Point(4, 25);
             this.Sayfa_Yazıcı.Name = "Sayfa_Yazıcı";
             this.Sayfa_Yazıcı.Padding = new System.Windows.Forms.Padding(3);
-            this.Sayfa_Yazıcı.Size = new System.Drawing.Size(874, 192);
+            this.Sayfa_Yazıcı.Size = new System.Drawing.Size(874, 189);
             this.Sayfa_Yazıcı.TabIndex = 1;
             this.Sayfa_Yazıcı.Text = "Yazıcı";
             // 
             // Yazıcı_Yazdır
             // 
-            this.Yazıcı_Yazdır.Location = new System.Drawing.Point(15, 90);
+            this.Yazıcı_Yazdır.Location = new System.Drawing.Point(15, 96);
             this.Yazıcı_Yazdır.Name = "Yazıcı_Yazdır";
             this.Yazıcı_Yazdır.Size = new System.Drawing.Size(294, 24);
             this.Yazıcı_Yazdır.TabIndex = 24;
@@ -1011,9 +1022,9 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(12, 39);
+            this.label11.Location = new System.Drawing.Point(12, 42);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(75, 13);
+            this.label11.Size = new System.Drawing.Size(94, 16);
             this.label11.TabIndex = 22;
             this.label11.Text = "Soldan Boşluk";
             // 
@@ -1025,7 +1036,7 @@
             0,
             0,
             65536});
-            this.Yazıcı_Sol.Location = new System.Drawing.Point(93, 37);
+            this.Yazıcı_Sol.Location = new System.Drawing.Point(112, 40);
             this.Yazıcı_Sol.Maximum = new decimal(new int[] {
             9999,
             0,
@@ -1037,7 +1048,7 @@
             0,
             -2147483648});
             this.Yazıcı_Sol.Name = "Yazıcı_Sol";
-            this.Yazıcı_Sol.Size = new System.Drawing.Size(216, 20);
+            this.Yazıcı_Sol.Size = new System.Drawing.Size(197, 22);
             this.Yazıcı_Sol.TabIndex = 23;
             this.Yazıcı_Sol.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.Yazıcı_Sol.ValueChanged += new System.EventHandler(this.Yazıcı_Ayar_Değişti);
@@ -1045,9 +1056,9 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(12, 66);
+            this.label12.Location = new System.Drawing.Point(12, 70);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(73, 13);
+            this.label12.Size = new System.Drawing.Size(89, 16);
             this.label12.TabIndex = 20;
             this.label12.Text = "Üstten Boşluk";
             // 
@@ -1059,7 +1070,7 @@
             0,
             0,
             65536});
-            this.Yazıcı_Üst.Location = new System.Drawing.Point(93, 64);
+            this.Yazıcı_Üst.Location = new System.Drawing.Point(112, 68);
             this.Yazıcı_Üst.Maximum = new decimal(new int[] {
             9999,
             0,
@@ -1071,7 +1082,7 @@
             0,
             -2147483648});
             this.Yazıcı_Üst.Name = "Yazıcı_Üst";
-            this.Yazıcı_Üst.Size = new System.Drawing.Size(216, 20);
+            this.Yazıcı_Üst.Size = new System.Drawing.Size(197, 22);
             this.Yazıcı_Üst.TabIndex = 21;
             this.Yazıcı_Üst.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.Yazıcı_Üst.ValueChanged += new System.EventHandler(this.Yazıcı_Ayar_Değişti);
@@ -1080,9 +1091,9 @@
             // 
             this.Yazıcı_Yazıcılar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.Yazıcı_Yazıcılar.FormattingEnabled = true;
-            this.Yazıcı_Yazıcılar.Location = new System.Drawing.Point(93, 10);
+            this.Yazıcı_Yazıcılar.Location = new System.Drawing.Point(112, 10);
             this.Yazıcı_Yazıcılar.Name = "Yazıcı_Yazıcılar";
-            this.Yazıcı_Yazıcılar.Size = new System.Drawing.Size(216, 21);
+            this.Yazıcı_Yazıcılar.Size = new System.Drawing.Size(197, 24);
             this.Yazıcı_Yazıcılar.TabIndex = 5;
             this.Yazıcı_Yazıcılar.SelectedIndexChanged += new System.EventHandler(this.Yazıcı_Yazıcılar_SelectedIndexChanged);
             // 
@@ -1092,16 +1103,16 @@
             this.Yazıcı_Açıklama.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.Yazıcı_Açıklama.Location = new System.Drawing.Point(315, 11);
             this.Yazıcı_Açıklama.Name = "Yazıcı_Açıklama";
-            this.Yazıcı_Açıklama.Size = new System.Drawing.Size(103, 17);
+            this.Yazıcı_Açıklama.Size = new System.Drawing.Size(122, 20);
             this.Yazıcı_Açıklama.TabIndex = 6;
             this.Yazıcı_Açıklama.Text = "Yazıcı detayları";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 13);
+            this.label1.Location = new System.Drawing.Point(12, 14);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(46, 13);
+            this.label1.Size = new System.Drawing.Size(58, 16);
             this.label1.TabIndex = 7;
             this.label1.Text = "Yazıcılar";
             // 
@@ -1132,26 +1143,49 @@
             // 
             // Ayraç_Üst_Alt.Panel2
             // 
-            this.Ayraç_Üst_Alt.Panel2.Controls.Add(this.Görsel_Çıktı_ArkaPlanRenk);
-            this.Ayraç_Üst_Alt.Panel2.Controls.Add(this.Görsel_Çıktı_Sürüklenebilir);
-            this.Ayraç_Üst_Alt.Panel2.Controls.Add(this.Görsel_Çıktı_Genişlik);
-            this.Ayraç_Üst_Alt.Panel2.Controls.Add(this.Görsel_Çıktı_Yükseklik);
-            this.Ayraç_Üst_Alt.Panel2.Controls.Add(this.Görsel_Çıktı_Panel);
-            this.Ayraç_Üst_Alt.Panel2.Controls.Add(this.Görsel_Çıktı_Yakınlaştırma);
+            this.Ayraç_Üst_Alt.Panel2.Controls.Add(this.P_ÇizimKonrolleri);
             this.Ayraç_Üst_Alt.Size = new System.Drawing.Size(886, 316);
             this.Ayraç_Üst_Alt.SplitterDistance = 222;
             this.Ayraç_Üst_Alt.TabIndex = 15;
             // 
+            // P_ÇizimKonrolleri
+            // 
+            this.P_ÇizimKonrolleri.Controls.Add(this.Görsel_Çıktı_ArkaPlanRenk);
+            this.P_ÇizimKonrolleri.Controls.Add(this.Görsel_Çıktı_Genişlik);
+            this.P_ÇizimKonrolleri.Controls.Add(this.Görsel_Çıktı_Yükseklik);
+            this.P_ÇizimKonrolleri.Controls.Add(this.Görsel_Çıktı_Sürüklenebilir);
+            this.P_ÇizimKonrolleri.Controls.Add(this.Görsel_Çıktı_Panel);
+            this.P_ÇizimKonrolleri.Controls.Add(this.Görsel_Çıktı_Yakınlaştırma);
+            this.P_ÇizimKonrolleri.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.P_ÇizimKonrolleri.Location = new System.Drawing.Point(0, 0);
+            this.P_ÇizimKonrolleri.Name = "P_ÇizimKonrolleri";
+            this.P_ÇizimKonrolleri.Size = new System.Drawing.Size(882, 86);
+            this.P_ÇizimKonrolleri.TabIndex = 1;
+            // 
             // DosyayaKaydetPaneli
             // 
             this.DosyayaKaydetPaneli.FileName = "Görsel.png";
+            // 
+            // Ayraç_Sol_Sağ
+            // 
+            this.Ayraç_Sol_Sağ.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Ayraç_Sol_Sağ.Location = new System.Drawing.Point(0, 0);
+            this.Ayraç_Sol_Sağ.Name = "Ayraç_Sol_Sağ";
+            // 
+            // Ayraç_Sol_Sağ.Panel1
+            // 
+            this.Ayraç_Sol_Sağ.Panel1.Controls.Add(this.Ayraç_Üst_Alt);
+            this.Ayraç_Sol_Sağ.Panel2Collapsed = true;
+            this.Ayraç_Sol_Sağ.Size = new System.Drawing.Size(886, 316);
+            this.Ayraç_Sol_Sağ.SplitterDistance = 500;
+            this.Ayraç_Sol_Sağ.TabIndex = 1;
             // 
             // AnaEkran
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(886, 316);
             this.Controls.Add(this.Kaydet);
-            this.Controls.Add(this.Ayraç_Üst_Alt);
+            this.Controls.Add(this.Ayraç_Sol_Sağ);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AnaEkran";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -1197,9 +1231,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.Yazıcı_Üst)).EndInit();
             this.Ayraç_Üst_Alt.Panel1.ResumeLayout(false);
             this.Ayraç_Üst_Alt.Panel2.ResumeLayout(false);
-            this.Ayraç_Üst_Alt.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Ayraç_Üst_Alt)).EndInit();
             this.Ayraç_Üst_Alt.ResumeLayout(false);
+            this.P_ÇizimKonrolleri.ResumeLayout(false);
+            this.P_ÇizimKonrolleri.PerformLayout();
+            this.Ayraç_Sol_Sağ.Panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.Ayraç_Sol_Sağ)).EndInit();
+            this.Ayraç_Sol_Sağ.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1277,6 +1315,8 @@
         private System.Windows.Forms.SaveFileDialog DosyayaKaydetPaneli;
         private System.Windows.Forms.ContextMenuStrip SağTuşMenü_Değişkenler;
         public System.Windows.Forms.Button Kaydet;
+        private System.Windows.Forms.Panel P_ÇizimKonrolleri;
+        private System.Windows.Forms.SplitContainer Ayraç_Sol_Sağ;
     }
 }
 
